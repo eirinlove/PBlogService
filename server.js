@@ -14,11 +14,6 @@ require('dotenv').config();
 app.use('/public', express.static('public'));  // 미들웨어 static파일 보관하기위해 public 폴더 쓸겁니다.
 
 const MongoClient = require('mongodb').MongoClient;
-/*
-MongoClient.connect('mongodb+srv://canon:ch995023!!@cluster0.4f9oj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', function(err, client){
-        database = client.db('todoapp');
-
-});*/
 MongoClient.connect(process.env.DB_URL, function(err, client){
         database = client.db('todoapp');
 
