@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    
+    <%- include('nav.ejs') %>
+
+
+        <h4 class="ml-2 my-3 text-center"> 슈퍼리스트</h4>
+        <div class="container input-group mb-2">
+          <input class="form-control" id = "search-input">
+          <button class="inpute-group-append btn btn-danger" id="search">검색</button>
+        </div>
+
+        <script>
+          $('#search').click(function(){
+            var item = $('#search-input').val();
+            window.location.replace('/search?value='+item) //뒤에 이름 = 값
+
+
+            /*var docu = { 이름 : '값', 이름2 : '값2'}
+            $.param(자료)
+            $(폼태그).serialize() 이걸로 써도 됨. 직접 제어하는 것.*/
+
+          });
+        </script>
+
+        <ul class = "list">
+          <% for (var i = 0; i < posts.length; i++){ %>
+          <a href = "detail/<%= posts[i]._id %>"><li class = "list_item">
+            <h4>게임 제목 : <%= posts[i].게임이름 %></h4>
+            <p>게임 내용 : <%= posts[i].게임내용 %></p></a>
+            <button class="delete" data-id="<%= posts[i]._id %>">삭제</button>
+            <button class="modify" data-id="<%= posts[i]._id %>">글수정</button>
+          </li>
+          <% } %>
+        </ul>
+        <script>
+
+        $('.delete').click(function(e){ // class 가 delete인 요소를 클릭하면 ajax 요청, 
+            
+            var postoren = e.target.dataset.id; // e.target 함수, 현재 누른 요소. dataset.id = data-id를 가져와라
+            var currentClick = $(this); // 현재 누른 버튼
+
+          $.ajax({
+
+            method : 'DELETE',
+            url : '/delete',
+            data : {_id : postoren } // 123을 /delete 경로로 보낸다. , req.body로 받는다.
+
+          }).done(function(context){ // 성공의 경우. 
+
+              console.log('성공했구나 축하한다.');  // 응답코드 200을 받으면 성공외침.
+              //페이지 새로고침 혹은 삭제버튼 누른 li 요소 제거.
+              currentClick.parent('li').fadeOut(); // fadeOut 애니메이션 jquery 함수 사용 (서서히 사라짐),,  부모의 li를 통째로(줄채로)날려버림
+          }).fail(function(xhr, textStatus, errorThrown){ //실패시,
+            //console.log('실패');
+            console.log(xhr, textStatus, errorThrown);
+          });
+
+        });
+
+
+        $('.modify').click(function(e){
+
+          var postedit = e.target.dataset.id;
+          
+
+          $.ajax({
+
+            method : 'MODIFY',
+            url : '/modify',
+            data : {_id : postedit }
+          }).done(function(context){ // 성공의 경우. 
+
+            console.log('착상 성공했구나 축하한다.');
+          }).fail(function(xhr, textStatus, errorThrown){ //실패시,
+            //console.log('실패');
+            console.log(xhr, textStatus, errorThrown);
+          });
+        });
+
+        
+        </script>
+      <!-- EJS를 사용해서 GET요청 해서 데이터 받아오기-->
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    
+  </body>
+</html>
