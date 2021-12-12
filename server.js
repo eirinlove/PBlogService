@@ -121,7 +121,7 @@ app.delete('/delete', function(req, res){
 
 app.get('/modify', function(req, res){
 
-        console.log("운지"+req.body); // 요청받은 요청의 body를 가져옴, 
+        console.log("text!"+req.body); // 요청받은 요청의 body를 가져옴, 
         req.body._id = parseInt(req.body._id);
         res.redirect('/edit/'+req.body._id);
 
