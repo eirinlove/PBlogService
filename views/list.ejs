@@ -35,23 +35,25 @@
           <a href = "detail/<%= posts[i]._id %>"><li class = "list_item">
             <h4>게임 제목 : <%= posts[i].게임이름 %></h4>
             <p>게임 내용 : <%= posts[i].게임내용 %></p></a>
-            <button class="delete" data-id="<%= posts[i]._id %>">삭제</button>
+            <button class="delete" data-id="<%= posts[i]._id %>" data-object = "<%= posts[i].id_a%>">삭제</button>
             <button class="modify" data-id="<%= posts[i]._id %>">글수정</button>
           </li>
           <% } %>
         </ul>
         <script>
 
-        $('.delete').click(function(e){ // class 가 delete인 요소를 클릭하면 ajax 요청, 
+        $('.delete').click(function(e){ // class 가 delete인 요소를 클릭하면 ajax 요청,  // 위의 data-id는 data- 뒤에 아무거나 붙으면 됨
             
             var postoren = e.target.dataset.id; // e.target 함수, 현재 누른 요소. dataset.id = data-id를 가져와라
+            var postoren2 = e.target.dataset.object;
             var currentClick = $(this); // 현재 누른 버튼
 
           $.ajax({
 
             method : 'DELETE',
             url : '/delete',
-            data : {_id : postoren } // 123을 /delete 경로로 보낸다. , req.body로 받는다.
+            data : {_id : postoren, _id_a : postoren2 } // 123을 /delete 경로로 보낸다. , req.body로 받는다. , 즉 위의 postoren이 server.js의 req.body._id가 됨.
+            // _id_a 는 오브젝트id 
 
           }).done(function(context){ // 성공의 경우. 
 
@@ -78,7 +80,7 @@
             data : {_id : postedit }
           }).done(function(context){ // 성공의 경우. 
 
-            console.log('착상 성공했구나 축하한다.');
+            console.log('기록 성공했구나 축하한다.');
           }).fail(function(xhr, textStatus, errorThrown){ //실패시,
             //console.log('실패');
             console.log(xhr, textStatus, errorThrown);

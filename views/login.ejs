@@ -33,10 +33,17 @@
     <%- include('nav.ejs') %>
       <form action="/login" method="POST">
       <h1> 아이디</h1>
-      <input type="text" name="id" >
+      <input type="text" name="id">
       <h1> 패스워드</h1>
       <input type="text" name="pw"><br><br>
       <button type="submit" class="btn btn-primary">Primary</button>
+      </form><br>
+      <form action="/register" method="POST">
+        <h1> 아이디</h1>
+        <input type="text" name="id">
+        <h1> 패스워드</h1>
+        <input type="text" name="pw"><br><br>
+      <button type="submit" class="btn btn-primary">Register</button>
       </form>
     <!-- Optional JavaScript; choose one of the two! -->
 
