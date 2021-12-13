@@ -59,32 +59,7 @@ app.get('/write', function(req,res){
 
 });
 
-app.post('/add', function(req,res){  //POST요청 받음
-        //res.send('전송완료')
-        res.render('add_context.ejs', {});
-        console.log("게임명은 "+req.body.game + " 게임내용은" + req.body.context + " 입력") //body의 데이터이름 game 을 받아옴.
-        //db에 저장.
-        database.collection('counter').findOne({count : '게시물 갯수'}, function(err, context){//findOne 함수는 데이터 하나만 찾음, 
-                console.log(context.totalPost)
-                var postcount = context.totalPost;
 
-                database.collection('post').insertOne({_id : postcount, 게임이름 : req.body.game ,게임내용 : req.body.context},function(err, context){ //object 자료형으로 저장
-                        console.log('저장완료'); // id = 총게시물갯수(지워진것 제외안함) +1; Autoincrement 기능 
-                        database.collection('counter').updateOne({count:'게시물 갯수'},{ $inc: {totalPost:1}},function(err, context){
-
-                                if(err) {return console.log(err)}
-
-                        }) //어떤데이터 수정?, 수정값, 오퍼레이터(연산자, 중괄호 한번 더 감싸기 유의) 
-
-
-
-        });  
-
-                
-
-
-})
-});
 
 
 
@@ -105,17 +80,6 @@ database.collection('post').find().toArray(function(err, context){
 });
 
 
-app.delete('/delete', function(req, res){
-
-        console.log(req.body); // 요청받은 요청의 body를 가져옴, 
-        req.body._id = parseInt(req.body._id);
-
-        database.collection('post').deleteOne(req.body, function(err, context){
-                console.log('삭제완료');
-                res.status(200).send({ message : '성공했습니다'}); //코드 200라는 응답을 반환.
-               //res.status(400).send({ message : '실패예시'}); //코드 400라는 응답을 반환.
-        });
-});
 
 
 
@@ -203,6 +167,7 @@ res.redirect('/'); //응답(인증) 성공의 경우.
 });
 
 
+
 app.get('/mypage', login_check,  function(req, res){ //login_check 는 미들웨어,,, req.user가 있으면 /mypage의 해당 내용을 보여줌
         
         console.log("유저정보"+req.user);
@@ -256,6 +221,70 @@ passport.use(new LocalStrategy({
 //세션 해제, 마이페이지등 접속시 
 
 // 세션 라이브러리를 불러오고 미들웨어 설정
+
+
+app.post('/register', function(req, res){
+
+        database.collection('login').insertOne( { id : req.body.id, pw : req.body.pw }, function(err, context){ // 중복 방지기능 추가하기.
+
+                res.redirect('/')
+        })
+})
+
+
+app.post('/add', function(req,res){  //POST요청 받음
+        //res.send('전송완료')
+
+        res.render('add_context.ejs', {});
+        console.log("게임명은 "+req.body.game + " 게임내용은" + req.body.context + " 입력") //body의 데이터이름 game 을 받아옴.
+        //db에 저장.
+        database.collection('counter').findOne({count : '게시물 갯수'}, function(err, context){//findOne 함수는 데이터 하나만 찾음, 
+                console.log(context.totalPost)
+                var postcount = context.totalPost;
+                var saveinfo = { _id : context.totalPost + 1 , 게임이름 : req.body.game, 게임내용: req.body.context, id_a : req.user._id, id_b : req.user.id}
+
+                database.collection('post').insertOne(saveinfo, function(err, context){ //object 자료형으로 저장
+                        console.log('저장완료'); // id = 총게시물갯수(지워진것 제외안함) +1; Autoincrement 기능 
+                        database.collection('counter').updateOne({count:'게시물 갯수'},{ $inc: {totalPost:1}},function(err, context){
+
+                                if(err) {return console.log(err)}
+
+                        }) //어떤데이터 수정?, 수정값, 오퍼레이터(연산자, 중괄호 한번 더 감싸기 유의) 
+
+
+
+        }); 
+
+
+        
+})
+});
+
+app.delete('/delete', function(req, res){
+
+        console.log(req.body); // 요청받은 요청의 body를 가져옴, 
+        req.body._id = parseInt(req.body._id);
+        
+
+        var deleteinfo = { _id : req.body._id, id_a : req.user._id }
+
+        if (req.body._id_a == req.user._id){
+        database.collection('post').deleteOne(deleteinfo, function(err, context){
+
+        
+                console.log('삭제완료' + '작성자 ' + req.user._id );
+
+               
+               
+               
+                res.status(200).send({ message : '성공했습니다'}); //코드 200라는 응답을 반환.
+               //res.status(400).send({ message : '실패예시'}); //코드 400라는 응답을 반환.
+        
+        });
+} else { console.log ('삭제 게시글 주인 : '+req.body._id_a+', 현재 사용자 : ' +req.user._id+' 삭제 실패')}
+//_id_a 는 list의 delete 함수에서 보내진 postoran2 = data-object임, 이는 list.ejs로 보내진 값을 다시 받은거임.
+});
+
 
 
 
