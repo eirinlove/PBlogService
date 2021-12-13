@@ -35,6 +35,7 @@
           <a href = "detail/<%= posts[i]._id %>"><li class = "list_item">
             <h4>게임 제목 : <%= posts[i].게임이름 %></h4>
             <p>게임 내용 : <%= posts[i].게임내용 %></p></a>
+            <p>작성자 : <%= posts[i].id_b %></p>
             <button class="delete" data-id="<%= posts[i]._id %>" data-object = "<%= posts[i].id_a%>">삭제</button>
             <button class="modify" data-id="<%= posts[i]._id %>">글수정</button>
           </li>
