@@ -5,6 +5,36 @@ app.use(bodyParser.urlencoded({extended : true}));
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 var database;
+
+
+let multer = require('multer');
+var storage = multer.diskStorage({
+        destination : function(req, file, cb){
+
+                cb(null, './public/images') //출력 경로 정의
+        },
+        filename : function(req, file, cb){
+                cb(null, file.originalname) //출력 파일명 정의
+        
+
+        }
+}); // memoryStorage는 휘발성, diskStorage는 비휘발성
+var path = require('path');
+var upload = multer({storage : storage
+        ,
+        fileFilter : function(req, file, cb){
+                var ext = path.extname(file.originalname);
+                if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg'){ // jpeg,jpg,png로 끝나는 파일 검사.
+                        return cb(new Error('PNG, JPEG만 허용됩니다.'))
+                }
+                cb(null, true);
+
+        },
+        limits:{
+                fileSize: 2048 * 2048 //파일 사이즈, 최대 2MB.
+        }});
+
+
 app.set('view engine', 'ejs');
 
 require('dotenv').config();
@@ -177,11 +207,21 @@ app.get('/mypage', login_check,  function(req, res){ //login_check 는 미들웨
 
 function login_check(req, res, next){ //미들웨어 생성
 
-        if(req.user){ //요청.user가 있으면 통과
+        if(req.user){ //요청.user가 있으면 통과 이걸 이용해서 관리자나 특정인물만 통과도 가능.
 
                 next();
         }else{ // 요청.user가 없으면 에러 메시지.
                 res.send('왜 로그인 안함?');
+        }
+}
+
+function admin_check(req, res, next){ //미들웨어 생성
+
+        if(req.user.id == 'admin'){ //요청.user가 있으면 통과 이걸 이용해서 관리자나 특정인물만 통과도 가능.
+
+                next();
+        }else{ // 요청.user가 없으면 에러 메시지.
+                res.send('관리자가 아니네요');
         }
 }
 
@@ -317,4 +357,25 @@ app.get('/search', (req,res) => {
         // req내 query내 오브젝트 value 일치값 확인
 })      // find는 정확한 텍스트만 찾아줌.
 
+
+app.get('/upload', function(req,res){
+
+res.render('upload.ejs');
+})
+
+//app.post ( '/upload', upload.single("imagefile"), function(req, res){
+app.post ( '/upload', upload.array("imagefile", 5), function(req, res){ //숫자 패러미터는 파일 최대개수
+        res.send('업로드 완료');
+} )
+
+
+app.get('/images/:imageName', function(req,res){
+
+        res.sendFile( __dirname + '/public/images/' + req.params.imageName)
+})
+
+
+app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
+app.use('/board/sub', require('./routes/board.js')); 
+// blog 로 접속하면, blog.js 로 라우팅을 하게 만듬
 // 검색 결과 페이지 만들기.
