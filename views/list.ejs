@@ -33,18 +33,20 @@
         <ul class = "list">
           <% for (var i = 0; i < posts.length; i++){ %>
           <a href = "detail/<%= posts[i]._id %>"><li class = "list_item">
-            <h4>게임 제목 : <%= posts[i].게임이름 %></h4>
-            <p>게임 내용 : <%= posts[i].게임내용 %></p></a>
+            <h4>토론 제목 : <%= posts[i].게임이름 %></h4>
+            <p>토론 내용 : <%= posts[i].게임내용 %></p></a>
             <p>작성자 : <%= posts[i].id_b %></p>
             <button class="delete" data-id="<%= posts[i]._id %>" data-object = "<%= posts[i].id_a%>">삭제</button>
             <button class="modify" data-id="<%= posts[i]._id %>">글수정</button>
+            <button class="chat" data-user="<%= posts[i].id_a %>">댓글작성</button>
           </li>
           <% } %>
         </ul>
         <script>
 
         $('.delete').click(function(e){ // class 가 delete인 요소를 클릭하면 ajax 요청,  // 위의 data-id는 data- 뒤에 아무거나 붙으면 됨
-            
+        
+
             var postoren = e.target.dataset.id; // e.target 함수, 현재 누른 요소. dataset.id = data-id를 가져와라
             var postoren2 = e.target.dataset.object;
             var currentClick = $(this); // 현재 누른 버튼
@@ -66,6 +68,16 @@
             console.log(xhr, textStatus, errorThrown);
           });
 
+        });
+
+
+        $('.chat').click(function(e){
+          var id = e.target.dataset.user;
+          $.post('/chatroom', {owner_id : id}).then(()=>{
+
+
+          
+          })
         });
 
 

@@ -6,6 +6,8 @@ const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 var database;
 
+const { ObjectId } = require('mongodb');
+
 
 let multer = require('multer');
 var storage = multer.diskStorage({
@@ -373,6 +375,30 @@ app.get('/images/:imageName', function(req,res){
 
         res.sendFile( __dirname + '/public/images/' + req.params.imageName)
 })
+
+
+
+app.get('/chat', login_check, function(req, res){
+
+res.render('chat.ejs');
+
+});
+
+app.post ( '/chatroom' ,login_check, function(req, res){ //숫자 패러미터는 파일 최대개수
+        
+
+        var savepoint = {
+
+                title : '토론방',
+                member : [ObjectId(req.body.owner_id), req.user],
+                date : new Date()
+        }
+
+        database.collection('chatroom').insertOne(savepoint).then((context)=>{
+                res.send('접속');
+        })
+        
+});
 
 
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
