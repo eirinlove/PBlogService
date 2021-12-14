@@ -1,0 +1,28 @@
+<input class="form-control" id="chat-input">
+<button class="btn btn-secondary" id="send">전송</button>
+
+<script>
+$('#send').click(function(){
+  var 채팅내용 = $('#chat-input').val();   //1, 2
+  var 보낼거 = {
+    parent: 지금누른채팅방id,
+    content: 채팅내용,
+  };
+  
+  //3
+  $.post('/message', 보낼거).then((a) => {  
+     console.log(a)
+  });
+
+});
+
+
+//4
+var 지금누른채팅방id;
+
+$('.list-group-item').click(function (){
+   $(this).css('background-color', '#eee');
+   지금누른채팅방id = $(this).attr('data-id');
+});
+
+</script>
