@@ -1,12 +1,35 @@
+
+<div class = "container p-4 detail">
+
+    <div class = "row">
+        <div class="col-3">
+            <ul class="list-group chat-list">
+                <li class="list-group-item" data-id="">
+                    <h6> 토론방1 </h6>
+                    <h6 class = "text-small">토론방 설명</h6>               
+                </li>
+                <li class="list-group-item" data-id="">
+                    <h6> 토론방2 </h6>
+                    <h6 class = "text-small">토론방 설명</h6>               
+                </li>
+            </ul>
+        </div>
+
+
+
+    </div>
+</div>
+
+
 <input class="form-control" id="chat-input">
 <button class="btn btn-secondary" id="send">전송</button>
 
 <script>
 $('#send').click(function(){
-  var 채팅내용 = $('#chat-input').val();   //1, 2
-  var 보낼거 = {
-    parent: 지금누른채팅방id,
-    content: 채팅내용,
+  var content = $('#chat-input').val();   //1, 2
+  var send = {
+    parent: chatid,
+    content: chatcontent,
   };
   
   //3
@@ -18,11 +41,11 @@ $('#send').click(function(){
 
 
 //4
-var 지금누른채팅방id;
+var chatid;
 
 $('.list-group-item').click(function (){
    $(this).css('background-color', '#eee');
-   지금누른채팅방id = $(this).attr('data-id');
+   chatid = $(this).attr('data-id');
 });
 
 </script>

@@ -380,7 +380,11 @@ app.get('/images/:imageName', function(req,res){
 
 app.get('/chat', login_check, function(req, res){
 
-res.render('chat.ejs');
+
+database.collection('chatroom').find({ member : req.user._id} ).toArray().then((context)=>{ //array안에 있는 만족하는 _id 를 찾아와라
+        res.render('chat.ejs', { data : context });
+
+})
 
 });
 
