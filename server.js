@@ -6,8 +6,12 @@ const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 var database;
 
-const { ObjectId } = require('mongodb');
 
+
+const { ObjectId } = require('mongodb');
+const http = require('http').createServer(app);
+const { Server } = require("socket.io"); //웹 소켓 이용
+const io = new Server(http);
 
 let multer = require('multer');
 var storage = multer.diskStorage({
@@ -54,7 +58,7 @@ MongoClient.connect(process.env.DB_URL, function(err, client){
 
       
 
-app.listen(8085, function(){
+http.listen(8085, function(){
         
         console.log('정답')
 });
@@ -404,6 +408,10 @@ app.post ( '/chatroom' ,login_check, function(req, res){ //숫자 패러미터�
         
 });
 
+app.get('/chat_admin', function(req,res){
+
+        res.render('chat_admin.ejs');
+        })
 
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
 app.use('/board/sub', require('./routes/board.js')); 
