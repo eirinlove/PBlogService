@@ -16,4 +16,4 @@ module.exports = router;
  // module.exports = 내보낼 변수명, 다른 파일에서 쓸 수 있게끔 내보낸다.  
  // require('파일경로') , 이 파일이나 라이브러리를 불러온다.
  // 이 경우, require ('/blog.js');
- // ※ 단 내보내주는 변수 구분에 유의
+ // ※ 단 내보내주는 변수 구분에 유의ㅇ
