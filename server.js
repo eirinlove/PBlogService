@@ -47,7 +47,7 @@ require('dotenv').config();
 
 
 
-app.use('/public', express.static('public'));  // 미들웨어 static파일 보관하기위해 public 폴더 쓸겁니다.
+app.use('/public', express.static('public'));  // 미들웨어 static파일 보관하기위해 public 폴더 쓸겁니다., 정적 import 파일들 관리 가능, css같은것
 
 const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect(process.env.DB_URL, function(err, client){
@@ -413,8 +413,21 @@ app.get('/chat_admin', function(req,res){
         res.render('chat_admin.ejs');
         })
 
+
+app.get('/thread_list', function(req,res){
+
+        database.collection('thread_list').find().toArray(function(err,context){
+
+                res.render('thread_list.ejs', {threads_info : context});
+        })
+        
+
+
+});
+
+
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
 app.use('/board/sub', require('./routes/board.js')); 
-app.use('/thread', require('/routes/thread.js'));
+app.use('/thread', require('./routes/thread.js'));
 // blog 로 접속하면, blog.js 로 라우팅을 하게 만듬
 // 검색 결과 페이지 만들기.
