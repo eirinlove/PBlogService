@@ -49,3 +49,21 @@ display:inline-block;
     padding-top: 5px;
     padding-right: 15px;
 }
+
+a:link {
+
+    color: black;
+    text-decoration: none;
+}
+
+a:visit {
+
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+
+    color: black;
+    text-decoration: underline;
+}
