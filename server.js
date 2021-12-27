@@ -414,16 +414,7 @@ app.get('/chat_admin', function(req,res){
         })
 
 
-app.get('/thread_list', function(req,res){
 
-        database.collection('thread_list').find().toArray(function(err,context){
-
-                res.render('thread_list.ejs', {threads_info : context});
-        })
-        
-
-
-});
 
 
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
