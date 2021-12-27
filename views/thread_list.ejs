@@ -14,14 +14,19 @@
 
       스레드 목록
     <div class = "thread_box" >
+
+      <% for (var i =0; i < threads_info.length; i++){ %>
+
       <div class = "thread_search" >
-      <div class = "thread_title">바보 스레드  </div><b>|</b>
-      <div class = "thread_context">바보를 위한 스레드입니다.</div><b>|</b>
-      <div class = "thread_member">참가자: 3명 </div><b>|</b>
-      <div class = "thread_admin">관리자 : asdasd</div><b>|&nbsp&nbsp</b>
-      <input type="button" value = "참가"> 
+      <div class = "thread_title"><%= threads_info[i].thread_name%> 스레드  </div><b>&nbsp&nbsp|</b>
+      <div class = "thread_context"><%= threads_info[i].thread_context%></div><b>&nbsp&nbsp|</b>
+      <div class = "thread_member">참가자: <%=threads_info[i].thread_usrNum%> </div><b>&nbsp&nbsp|</b>
+      <div class = "thread_admin">관리자 : <%=threads_info[i].usr_nname%></div><b>&nbsp&nbsp|</b>
+      <span class = "thread_enter">참가</span> 
+     
       
       </div>
+      <% } %>
     </div>
 
 
