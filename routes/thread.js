@@ -12,7 +12,7 @@ MongoClient.connect(process.env.DB_URL, function(err, client){
 
 
 
-router.get('/thread_view', function(req,res){
+router.get('/thread_view2', function(req,res){
 
     res.send (' 스레드 뷰 페이지 ');
 
@@ -36,7 +36,7 @@ router.get('/thread/:thread_id', function(req,res){ // 해당 스레드에 있�
         //console.log(req.params.id);
         console.log(context);
 
-        res.render('thread_detail.ejs', {postlist : context}); 
+        res.render('thread_view.ejs', {postlist : context}); 
 
         
 
