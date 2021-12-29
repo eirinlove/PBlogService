@@ -1,0 +1,29 @@
+.article_area{
+
+margin-left : 35px;
+margin-top : 35px;
+width: 850px;
+height : 1300px;
+}
+
+
+.thread_title{
+height : 50px;
+background-color :red;
+
+}
+
+.debate_area{
+width: 850px;
+height: 250px;
+background-color: blue;
+
+}
+
+
+.thread_view_area{
+
+    width: 850px;
+    height: 1000px;
+    background-color: blueviolet;
+}
