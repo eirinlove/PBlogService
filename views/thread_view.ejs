@@ -16,8 +16,10 @@
   </head>
   <body>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-
+    <script type="text/javascript" src="../public/js/timestamp.js"></script>
+    <script>
+      
+    </script>
     <%- include('nav.ejs') %>
 
 
@@ -31,9 +33,26 @@
     <div class= thread_view_area>
 
 
-      <div class=postNum>dddㅇ</div>
-        <div class=postList></div>
-        <a class = content_row>하이</a>
+      <div class=postFixed>
+          <span class= "postNumber">글번호</span>
+          <span class= "postTitle">글제목</span>
+          <span class= "postAuthor">작성자</span>
+          <span class= "postTime">작성일</span>
+          <span class= "postView">조회수</span>
+          <sp
+      </div>
+        <div class=postList>
+          <%for(i=0; i<postlist.length; i++){ %>
+          <a class = content_row>
+          <span class= "postNumber"><%=postlist[0].post_id%></span>
+          <span class= "postTitle"><%=postlist[0].post_name%></span>
+          <span class= "postAuthor"><%=postlist[0].usr_id%></span>
+          <span class= "postTime"><%=gotime(postlist[0].date)%></span>
+          <span class= "postView"><%=postlist[0].post_Viewer%></span>
+          </a> <%}%>
+
+        </div>
+       
 
     </div>
 

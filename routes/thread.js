@@ -1,6 +1,6 @@
 const express = require('express');
 var router = require('express').Router();
-
+var timestamps = require('../public/js/timestampler'); // timestamp 함수를 사용하기 위해 보냄.
 router.use('/public', express.static('public'));  // 미들웨어 static파일 보관하기위해 public 폴더 쓸겁니다., 정적 import 파일들 관리 가능, css같은것
 
 const MongoClient = require('mongodb').MongoClient;
@@ -36,7 +36,8 @@ router.get('/thread/:thread_id', function(req,res){ // 해당 스레드에 있�
         //console.log(req.params.id);
         console.log(context);
 
-        res.render('thread_view.ejs', {postlist : context}); 
+        res.render('thread_view.ejs', { postlist : context,
+                                        gotime : timestamps.renderFunc});  //timestamp js 에서 renderFunc 통해서 보낸것
 
         
 
