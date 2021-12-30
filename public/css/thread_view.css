@@ -27,3 +27,41 @@ background-color: blue;
     height: 1000px;
     background-color: blueviolet;
 }
+
+.postNumber{
+
+display:inline-block;
+width: 100px;
+text-align: center;
+    
+
+}
+.postTitle{
+   display:inline-block;
+   width : 400px;
+   text-align: left;
+}
+
+.postAuthor{
+    display:inline-block;
+    width : 100px;
+    text-align: left;
+}
+
+.postTime{
+    display:inline-block;
+    width: 100px;
+    text-align: center;
+}
+
+.postView{
+    display:inline-block;
+    width: 100px;
+    text-align: center;
+    
+}
+
+.content_row{
+    
+  
+}
