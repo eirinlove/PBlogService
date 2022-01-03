@@ -10,6 +10,7 @@ height : 1300px;
 .thread_title{
 width: 850px;
 height : 50px;
+padding-left : 15px;
 margin-bottom : 25px;
 background-color :red;
 
