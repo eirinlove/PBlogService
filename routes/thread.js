@@ -50,13 +50,15 @@ router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는
 router.get('/thread:thread_id/:post_id', function(req, res){ // : 로, 사용자가 입력한 문자[패러미터] 받음 .
 
     database.collection('thread_post').findOne({post_id : parseInt(req.params.post_id)}, function(err, context){ // 받은 문자를 받게됨,  위에 get 한 것.  parseint로 String을 Int로 변환
-
+        database.collection('thread_post').find({thread_id : parseInt(req.params.thread_id)}).toArray(function(err, context_another){
             console.log("포스트 데이터"+context);
 
-            res.render('postDetail.ejs', {postData : context}); // data object를 정의해서 detail.ejs 에서 읽어올 수 있게 함.
+            res.render('postDetail.ejs', {postData : context,
+                                            postlist : context_another,
+                                            gotime : timestamps.renderFunc}); // data object를 정의해서 detail.ejs 에서 읽어올 수 있게 함.
 
             //응답.render('detail.ejs', {이런 이름으로 : 이런 데이터를}) ejs파일은 render를 해줘야 하니 필수
-
+        })
     })
 });
 
