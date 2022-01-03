@@ -50,7 +50,7 @@ router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는
 
 router.get('/thread:thread_id/:post_id', function(req, res){ // : 로, 사용자가 입력한 문자[패러미터] 받음 .
 
-    database.collection('thread_post').findOne({post_id : parseInt(req.params.post_id)}, function(err, context){ // 받은 문자를 받게됨,  위에 get 한 것.  parseint로 String을 Int로 변환
+    database.collection('thread_post').findOne({post_id : parseInt(req.params.post_id)}, function(err, context){ // thread_id에 따른 post_id 를 매핑해야함. 해당 쓰레드에 있는 해당 게시글. (그렇지 않으며녀 포스트 아이디가 다른 쓰레드 포스트 id와 중복됨)
         database.collection('thread_post').find({thread_id : parseInt(req.params.thread_id)}).toArray(function(err, context_another){
             console.log("포스트 데이터"+context);
 

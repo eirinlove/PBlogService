@@ -18,8 +18,18 @@ exports.renderFunc =
 
   
        function titleViewer(thread_id){
+        
+        for(i=0; i<=data.length; i++ ){
 
-        return thread_id;
+        if(data[i].id == thread_id ){
+
+            console.log("값은"+data[i].name); 
+            return data[i].name;
+        }
+        //json에 등록된 이름 조회, json 배열을 순서대로 읽어들이면서, Thread의 타이틀명을 검색 함.
+    }
+        
+        
 
        }
 
