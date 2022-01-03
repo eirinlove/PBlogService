@@ -1,0 +1,18 @@
+.content_view_box{
+   
+    width: 850px;
+    height: 500px;
+    background-color: red;
+}
+
+.content_title_box{
+
+  height : 50px;
+  background-color: gray;
+}
+
+.content_info_box{
+
+    height : 30px;
+    background-color: blue;
+}

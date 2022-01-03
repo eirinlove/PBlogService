@@ -12,6 +12,8 @@
 
 
     <link rel ="stylesheet" href="/public/main.css">
+    <link rel = "stylesheet" type="text/css" href= "/public/css/thread_view.css">
+    <link rel = "stylesheet" type="text/css" href= "/public/css/content.css">
   </head>
   <body>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -19,12 +21,50 @@
 
     <%- include('nav.ejs') %>
 
+<div class = "article_area">
+<div class = "thread_title"></div>
 
-
+    <div class= "content_view_box">
+      <div class= "content_title_box">
+      </div>
+      <div class= "content_info_box">
+      </div>
+    </div>
       <h4> 게시글 페이지 </h4>
       
       <h4> 게임: <%= postData.post_name %></h4>
-      
+    
+
+
+    <div class= thread_view_area>
+
+
+      <div class=postFixed>
+          <span class= "postNumber">글번호</span>
+          <span class= "postTitle">글제목</span>
+          <span class= "postAuthor">작성자</span>
+          <span class= "postTime">작성일</span>
+          <span class= "postView">조회수</span>
+          
+      </div>
+        <div class=postList>
+          <%for(i=0; i<postlist.length; i++){ 
+            if (postlist[i].post_id == postData.post_id) { %>
+          <a class = content_row_same href = "thread<%=postlist[0].thread_id%>/<%= postlist[i].post_id %>"><%}%>
+            <% if (postlist[i].post_id != postData.post_id) {%>
+          <a class = content_row href = "thread<%=postlist[0].thread_id%>/<%= postlist[i].post_id %>"><%}%>
+          <span class= "postNumber"><%=postlist[i].post_id%></span>
+          <span class= "postTitle"><%=postlist[i].post_name%></span>
+          <span class= "postAuthor"><%=postlist[i].usr_id%></span>
+          <span class= "postTime"><%=gotime(postlist[i].date)%></span>
+          <span class= "postView"><%=postlist[i].post_Viewer%></span>
+          </a> <%}%>
+
+        </div>
+       
+
+    </div>
+  </div>
 
       
 
