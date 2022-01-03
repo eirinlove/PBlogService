@@ -9,10 +9,33 @@
 
   height : 50px;
   background-color: gray;
+  padding-left: 15px;
+  padding-top : 10px;
+  font-size : 18px;
 }
 
 .content_info_box{
-
+    
+    padding-left: 15px;
+    padding-top : 5px;
     height : 30px;
     background-color: blue;
+}
+
+.content_user_info {
+    display:inline-block;
+    width: 300px;
+}
+
+.content_comment{
+    display:inline-block;
+    width: 100px;
+}
+.content_viewer{
+    display:inline-block;
+    width: 100px;
+}
+.content_todate{
+    display:inline-block;
+    width: 100px;
 }

@@ -1,6 +1,7 @@
 const express = require('express');
 var router = require('express').Router();
 var timestamps = require('../public/js/timestampler'); // timestamp 함수를 사용하기 위해 보냄.
+var titleviewer = require('../public/js/titleViewer');
 router.use('/public', express.static('public'));  // 미들웨어 static파일 보관하기위해 public 폴더 쓸겁니다., 정적 import 파일들 관리 가능, css같은것
 
 const MongoClient = require('mongodb').MongoClient;
@@ -55,7 +56,8 @@ router.get('/thread:thread_id/:post_id', function(req, res){ // : 로, 사용자
 
             res.render('postDetail.ejs', {postData : context,
                                             postlist : context_another,
-                                            gotime : timestamps.renderFunc}); // data object를 정의해서 detail.ejs 에서 읽어올 수 있게 함.
+                                            gotime : timestamps.renderFunc,
+                                            thread_list : titleviewer.renderFunc}); // data object를 정의해서 detail.ejs 에서 읽어올 수 있게 함.
 
             //응답.render('detail.ejs', {이런 이름으로 : 이런 데이터를}) ejs파일은 render를 해줘야 하니 필수
         })
