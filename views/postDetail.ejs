@@ -22,12 +22,17 @@
     <%- include('nav.ejs') %>
 
 <div class = "article_area">
-<div class = "thread_title"></div>
+<div class = "thread_title"><%=thread_list(postData.thread_id)%> 스레드</div>
 
     <div class= "content_view_box">
       <div class= "content_title_box">
+        <%= postData.post_name %>
       </div>
       <div class= "content_info_box">
+        <span class = "content_user_info"><%=postData.usr_id%></span>
+        <span class = "content_comment">댓글: <%=postData.comment%></span>
+        <span class = "content_viewer">조회수: <%=postData.post_Viewer%></span>
+        <span class = "content_todate">작성일: <%=gotime(postData.date)%></span>
       </div>
     </div>
       <h4> 게시글 페이지 </h4>
@@ -50,9 +55,9 @@
         <div class=postList>
           <%for(i=0; i<postlist.length; i++){ 
             if (postlist[i].post_id == postData.post_id) { %>
-          <a class = content_row_same href = "thread<%=postlist[0].thread_id%>/<%= postlist[i].post_id %>"><%}%>
+          <a class = content_row_same href = "<%= postlist[i].post_id %>"><%}%>
             <% if (postlist[i].post_id != postData.post_id) {%>
-          <a class = content_row href = "thread<%=postlist[0].thread_id%>/<%= postlist[i].post_id %>"><%}%>
+          <a class = content_row href = "<%= postlist[i].post_id %>"><%}%>
           <span class= "postNumber"><%=postlist[i].post_id%></span>
           <span class= "postTitle"><%=postlist[i].post_name%></span>
           <span class= "postAuthor"><%=postlist[i].usr_id%></span>
