@@ -1,0 +1,23 @@
+.write_head{
+    line-height : 55px; /* line-height 주면 height 만큼 글자가 가운데 정렬됨 */
+    height : 55px;
+    background-color: gray;
+
+    margin-bottom : 15px;
+}
+
+.input_text_title{
+
+    margin-left:0px;
+    margin-bottom : 15px;
+}
+
+.input_text_context{
+    border: solid;
+    border-radius: 3%;
+    border-color : gray;
+    text-align: left;
+    width: 850px;
+    height: 500px;
+    margin-left:0px;
+}
