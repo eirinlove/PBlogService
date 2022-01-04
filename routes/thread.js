@@ -48,6 +48,20 @@ router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는
 
 });
 
+
+// ---------------- 글쓰기  -------------- //
+router.get('/thread:thread_id/post_write', function(req, res){ // thread_view의 post_write href로부터 옴
+
+
+    res.render('post_write.ejs', {thread_data : parseInt(req.params.thread_id) // 쓰레드 타이틀 표시용
+        ,thread_list : titleviewer.renderFunc});  // 함수 
+
+});
+
+
+
+
+// ------------- 포스트 확인 ---------------// 맨 나중에 넣어야 함 (post_id 문자열 인식때문에)
 router.get('/thread:thread_id/:post_id', function(req, res){ // : 로, 사용자가 입력한 문자[패러미터] 받음 .
 
     database.collection('thread_post').findOne({post_id : parseInt(req.params.post_id)}, function(err, context){ // thread_id에 따른 post_id 를 매핑해야함. 해당 쓰레드에 있는 해당 게시글. (그렇지 않으며녀 포스트 아이디가 다른 쓰레드 포스트 id와 중복됨)
@@ -63,6 +77,8 @@ router.get('/thread:thread_id/:post_id', function(req, res){ // : 로, 사용자
         })
     })
 });
+
+
 
 
 module.exports = router;

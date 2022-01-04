@@ -74,4 +74,13 @@ text-align: center;
 }
 
 
+.float_right{
 
+    float:right; /* .article_area의 맨 오른쪽 */
+}
+.thread_write {
+    display:inline-block;
+   
+  
+    
+}
