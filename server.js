@@ -6,7 +6,7 @@ const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 var database;
 
-var cryp = require('./function/crypto');
+var cryp = require('./function/saltcrypt');
 
 
 
