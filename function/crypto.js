@@ -2,8 +2,8 @@
 
 const crypto = require('crypto');
 
-exports.renderFunc = 
 
+exports.renderFunc = 
 
 
 //ES5문법
@@ -25,9 +25,12 @@ return a;
 }*/
 
  // ES6 문법
+ 
 
 base64crypto = (password) => { 
 
 return crypto.createHash('sha512').update(password).digest('base64');
 
 }
+
+
