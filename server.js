@@ -6,6 +6,8 @@ const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 var database;
 
+var cryp = require('./function/crypto');
+
 
 
 const { ObjectId } = require('mongodb');
@@ -48,6 +50,7 @@ require('dotenv').config();
 
 
 app.use('/public', express.static('public'));  // 미들웨어 static파일 보관하기위해 public 폴더 쓸겁니다., 정적 import 파일들 관리 가능, css같은것
+app.use('/function', express.static('function')); 
 
 const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect(process.env.DB_URL, function(err, client){
@@ -415,9 +418,13 @@ app.get('/chat_admin', function(req,res){
 
 app.get('/tm', function(req,res){
 
-        res.render('testmail.ejs');
+        res.render('testmail.ejs', {cryptos : cryp.renderFunc});
 })
 
+app.get('/register', function(req,res){
+
+        res.render('register.ejs');
+})
 
 
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
