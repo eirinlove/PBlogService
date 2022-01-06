@@ -24,6 +24,7 @@ const createSalt = () =>
             crypto.pbkdf2(plainPassword, salt, 9999, 64, 'sha512', (err, key) =>{ // 평문패스워드, 솔트, 키스트레칭, 바이트, 암호화방식
                 if(err) reject(err);
                 resolve({ password : key.toString('base64'),salt});
+               
             })
         })
 
