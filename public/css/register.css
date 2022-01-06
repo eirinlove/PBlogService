@@ -1,0 +1,35 @@
+.register_id_boxform{
+    border : 1px solid black;
+    width: auto;
+    height: 750px;
+    background-color: #ebebeb;
+
+}
+
+.register_id_inputbox{
+    
+position: absolute;  /*부모 엘리먼트(register_id_boxform) 를 기준으로 좌 50% 탑 50%정렬, transform은 엘리먼트 크기만큼 빼서 이동.*/ 
+left : 50%;
+top : 50%;
+transform:translate(-50%, -50%);
+}
+.register_title {
+    line-height: 30px;
+display:inline-block;
+width: 100px;
+float: left;
+text-align:left;
+}
+.input_text_box{
+
+    margin-bottom : 15px;
+}
+
+.box_context{
+
+   
+}
+
+.mail_number_box{
+    margin-left : 5px;
+}

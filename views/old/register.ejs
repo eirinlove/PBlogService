@@ -7,33 +7,44 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel = "stylesheet" type="text/css" href= "/public/css/thread_view.css">
-    <link rel = "stylesheet" type="text/css" href= "/public/css/register.css">
-    <title>회원가입</title>
+
+    <title>Hello, world!</title>
 
 
+    <style>
 
+        h1{
+
+            margin-left: 50px;
+            margin-top: 50px;
+        }
+        input{
+            margin-left: 50px;
+            width: 500px;
+        }
+        button{
+
+            margin-left: 50px;
+        }
+
+    </style>
   </head>
   <body>
     <%- include('nav.ejs') %>
-    <div class ="article_area">
-    <div class ="register_id_boxform">
-        <div class = "register_id_inputbox">
-        <div class = "input_text_box"><span class="register_title">메일주소</span>
-            <input type = "text" class = "box_context"> <button class = "mail_check">인증요청</button>
-                <input type = "text" class = "mail_number_box"> <button class = "mail_check">인증확인</button></div>
-       
-        <div class = "input_text_box"><span class="register_title">아이디</span>
-            <input type = "text" class = "box_context">
-            <button class = "mail_check">중복확인</button> </div>
-        
-        <div class = "input_text_box"><span class="register_title">비밀번호</span>
-            <input type = "text" class = "box_context"> </div>
-        <div class = "input_text_box"><span class="register_title">닉네임</span>
-            <input type = "text" class = "box_context"> </div>
-        </div>
-    </div>
-    </div>
+      <form action="/login" method="POST">
+      <h1> 아이디</h1>
+      <input type="text" name="id">
+      <h1> 패스워드</h1>
+      <input type="text" name="pw"><br><br>
+      <button type="submit" class="btn btn-primary">Primary</button>
+      </form><br>
+      <form action="/register" method="POST">
+        <h1> 아이디</h1>
+        <input type="text" name="id">
+        <h1> 패스워드</h1>
+        <input type="text" name="pw"><br><br>
+      <button type="submit" class="btn btn-primary">Register</button>
+      </form>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
