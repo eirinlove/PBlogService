@@ -6,7 +6,7 @@ const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 var database;
 
-var cryp = require('./function/saltcrypt');
+var cryp = require('./function/crypto');
 
 
 
@@ -425,6 +425,23 @@ app.get('/register', function(req,res){
 
         res.render('register.ejs');
 })
+
+
+
+
+
+app.post('/passtest', function(req,res){  //POST요청 받음
+        //res.send('전송완료')
+
+        res.render('add_context.ejs', {});
+      
+                var saveinfo = { password: cryp.renderFunc(req.body.pass)}
+                database.collection('password').insertOne(saveinfo, function(err, context){ 
+                       
+        }); 
+});
+
+
 
 
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
