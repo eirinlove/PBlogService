@@ -1,13 +1,16 @@
 .register_id_boxform{
+    position: relative; 
+
     border : 1px solid black;
-    width: auto;
+    width: 850px;;
     height: 750px;
     background-color: #ebebeb;
 
 }
 
 .register_id_inputbox{
-    
+
+width: 500px;
 position: absolute;  /*부모 엘리먼트(register_id_boxform) 를 기준으로 좌 50% 탑 50%정렬, transform은 엘리먼트 크기만큼 빼서 이동.*/ 
 left : 50%;
 top : 50%;
