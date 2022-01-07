@@ -1,4 +1,4 @@
-# PBlogService
+# DebateThreadService
 Nodejs 토론 스레드 서비스 개발
 
 
