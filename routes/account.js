@@ -5,16 +5,26 @@ const CheckEmail = require("../public/js/emailerrorchk");
 router.post('/emailcheck', function(req,res){
 
     var a = CheckEmail.chkemail(req.body.mail);
+    var maildup;
    // console.log(req.body.mail); // 받아온 메일주소
     if ( a == 1) { // 올바른 이메일 형식이면 중복검사 수행.
-        database.collection('thread_post').findOne({post_id : parseInt(req.params.post_id)}, function(err, context){
+        database.collection('user').findOne({usr_email: req.body.mail}, function(err, context){
         
-            
+            maildup = context;
+            console.log("가져온메일"+req.body.mail);
+            console.log("검색한메일"+maildup.usr_email);
+            if (maildup.usr_email == req.body.mail) {
+                var result = "이미 가입된 회원입니다.";
+                res.send({result:result}); 
+
+            }
+            else { var result = "가입하셔도 좋습니다"
+                    res.send({result:result});}
+
         })
 
         
-        var result = "올바른 이메일 형식입니다.";
-        res.send({result:result}); 
+
     }
 
     if ( a == 0) {
