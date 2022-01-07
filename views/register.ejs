@@ -51,14 +51,13 @@
             
             $.ajax({
             method : 'POST',
-            url : '/mail/mail',
-            data : {mail : data } // 123을 /delete 경로로 보낸다. , req.body로 받는다. , 즉 위의 postoren이 server.js의 req.body._id가 됨.
+            url : '/accountfunc/emailcheck',
+            data : { mail : data } // 123을 /delete 경로로 보낸다. , req.body로 받는다. , 즉 위의 postoren이 server.js의 req.body._id가 됨.
             // _id_a 는 오브젝트id 
 
-          }).done(function(context){ // 성공의 경우. 
-
-              console.log('성공했구나 축하한다.');  // 응답코드 200을 받으면 성공외침.
-              alert('메일을 보냈습니다. 확인하세요.');
+          }).done(function(rep){ // 성공의 경우. 
+          
+           alert(rep.result);
              
           }).fail(function(xhr, textStatus, errorThrown){ //실패시,
             alert('메일을 보내지못했습니다. 다시 시도하세요.');
