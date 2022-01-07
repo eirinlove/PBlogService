@@ -2,7 +2,9 @@
 Nodejs 토론 스레드 서비스 개발
 
 
-프로젝트 기간 : 2021년 12월 14일 ~ 2021년 12월 30일
+프로젝트 기간 : 2021년 12월 19일 ~ 2021년 1월 3일
+
+1차 연장기간 : 1월 4일 ~ 1월 12일
 * 개발 플랫폼 : Node.js , Express.js, javascript, AJAX,  MongoDB , Github, Nginx
   
   
