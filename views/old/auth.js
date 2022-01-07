@@ -1,6 +1,6 @@
 //const express = require('express');
 //const router = express.Router();
-var router = require('express').Router();
+/*var router = require('express').Router();
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const path = require('path');
@@ -44,4 +44,4 @@ router.post('/mail', async(req, res) => {
     });
 });
 
-module.exports=router;
+module.exports=router;*/

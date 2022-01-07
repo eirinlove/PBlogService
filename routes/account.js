@@ -12,13 +12,16 @@ router.post('/emailcheck', function(req,res){
         
             maildup = context;
             console.log("가져온메일"+req.body.mail);
-            console.log("검색한메일"+maildup.usr_email);
-            if (maildup.usr_email == req.body.mail) {
+            console.log("검색한메일"+maildup);
+            if (maildup) { // maildup는 무언가 find 되었을 때만 채워진다.
                 var result = "이미 가입된 회원입니다.";
                 res.send({result:result}); 
 
             }
-            else { var result = "가입하셔도 좋습니다"
+            else { var result = "이메일로 보내진 인증번호를 입력하여 주세요." // 여기서 이메일 보내기 프로토콜 진행
+                    //auth.js 를 이용해야함. 인자는 여기있는 req.body.mail
+                    var b = req.body.mail;
+                    CheckEmail.authen(b);
                     res.send({result:result});}
 
         })
