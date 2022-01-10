@@ -58,9 +58,9 @@
           }).done(function(rep){ // 성공의 경우. 
           
            //alert(rep.result);
-           alert(JSON.stringify(rep.authcode));
-           authcodes = rep.authcode;
-             
+            //alert(JSON.stringify(rep.authcode));
+             alert(rep.authcode);
+             authcodes = rep.authcode;
           }).fail(function(xhr, textStatus, errorThrown){ //실패시,
             alert('메일을 보내지못했습니다. 다시 시도하세요.');
             console.log(xhr, textStatus, errorThrown);
