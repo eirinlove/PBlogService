@@ -41,7 +41,7 @@
 
 
     <script>
-        
+        var authcodes;
        
 
         $('.mail_check').click(function(e){ //jquery로 가져옴.클릭함수를.
@@ -57,7 +57,9 @@
 
           }).done(function(rep){ // 성공의 경우. 
           
-           alert(rep.result);
+           //alert(rep.result);
+           alert(JSON.stringify(rep.authcode));
+           authcodes = rep.authcode;
              
           }).fail(function(xhr, textStatus, errorThrown){ //실패시,
             alert('메일을 보내지못했습니다. 다시 시도하세요.');

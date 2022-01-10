@@ -35,6 +35,7 @@ async function authen(mailname){
     ejs.renderFile(appDir+'/template/authMail.ejs', {authCode : authNum}, function (err, data) { //랜덤번호를 authCode로 authMail로 보낸다.
       if(err){console.log(err)}
       emailTemplete = data;
+      
 });
 
 let transporter = nodemailer.createTransport({
@@ -63,7 +64,7 @@ transporter.sendMail(mailOptions, function (error, info) {
     res.send(authNum);
     transporter.close()
 });
-
+return "hihi";
 };
 
 
