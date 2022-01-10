@@ -1,6 +1,9 @@
 var router = require('express').Router();
 //import {CheckEmail} from '../public/js/emailerrorchk';
 const CheckEmail = require("../public/js/emailerrorchk");
+const { post } = require('./thread');
+const authViewers = require("../public/js/authViewer");
+
 
 router.post('/emailcheck', function(req,res){
 
@@ -21,9 +24,14 @@ router.post('/emailcheck', function(req,res){
             else { var result = "이메일로 보내진 인증번호를 입력하여 주세요." // 여기서 이메일 보내기 프로토콜 진행
                     //auth.js 를 이용해야함. 인자는 여기있는 req.body.mail
                     var b = req.body.mail;
-                    var c = toString(CheckEmail.authen(b));
-                    //console.log("오마이갓"+c);
-                    res.send({result:result, authcode:c});}
+                    var c = CheckEmail.authen(b);
+                    
+                  
+                   
+                   
+
+                   
+                    res.send({result:result, authcode:authViewers.authHive});}
 
         })
 

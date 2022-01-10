@@ -1,8 +1,16 @@
-//const express = require('express');
+const express = require('express');
 const ejs = require('ejs');
 const path = require('path');
 var appDir = path.dirname(require.main.filename);
 const nodemailer = require('nodemailer');
+const req = require('express/lib/request');
+const { request } = require('http');
+
+const fs = require('fs');
+
+var cookieParser = require('cookie-parser');
+const res = require('express/lib/response');
+const { append } = require('express/lib/response');
 
 exports.chkemail =
 
@@ -32,6 +40,9 @@ async function authen(mailname){
 
     let authNum = Math.random().toString().substr(2,6); //랜덤 번호 생성
     let emailTemplete;
+    const key = { keys : authNum};
+    const dokey = JSON.stringify(key);
+    fs.writeFileSync('keyimpress.json',dokey);
     ejs.renderFile(appDir+'/template/authMail.ejs', {authCode : authNum}, function (err, data) { //랜덤번호를 authCode로 authMail로 보낸다.
       if(err){console.log(err)}
       emailTemplete = data;
@@ -61,10 +72,11 @@ transporter.sendMail(mailOptions, function (error, info) {
         console.log(error);
     }
     console.log("Finish sending email : " + info.response);
-    res.send(authNum);
+    //res.send(authNum);
     transporter.close()
+    
 });
-return "hihi";
+
 };
 
 
