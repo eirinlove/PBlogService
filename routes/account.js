@@ -24,14 +24,14 @@ router.post('/emailcheck', function(req,res){
             else { var result = "이메일로 보내진 인증번호를 입력하여 주세요." // 여기서 이메일 보내기 프로토콜 진행
                     //auth.js 를 이용해야함. 인자는 여기있는 req.body.mail
                     var b = req.body.mail;
-                    var c = CheckEmail.authen(b);
                     
-                  
-                   
-                   
-
-                   
-                    res.send({result:result, authcode:authViewers.authHive});}
+                    
+                        CheckEmail.authen(b);
+                        var c =  authViewers.authHive();
+                        console.log (c);
+               
+                    
+                    res.send({result:result, authbutton:c});}
 
         })
 
@@ -44,6 +44,37 @@ router.post('/emailcheck', function(req,res){
         res.send({result:result});
     }
     
+})
+
+
+router.post('/idcheck', function(req,res){
+
+    var iddup;
+
+    database.collection('user').findOne({usr_id: req.body.usrid}, function(err, context ){
+        
+        iddup = context
+
+
+
+        if (iddup){
+            var result = "이미 가입된 회원입니다.";
+            res.send({result:result});
+        }
+
+        else {
+
+           var result = "가입하셔도 좋습니다.";
+           var dupcheck = "ok";
+           res.send({result:result, dupcheck:dupcheck});
+        }
+        
+
+
+    })
+
+
+
 })
 
 module.exports=router;

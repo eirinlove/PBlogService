@@ -40,9 +40,19 @@ async function authen(mailname){
 
     let authNum = Math.random().toString().substr(2,6); //랜덤 번호 생성
     let emailTemplete;
-    const key = { keys : authNum};
-    const dokey = JSON.stringify(key);
-    fs.writeFileSync('keyimpress.json',dokey);
+   
+
+    var obp = {}
+    obp.table = []
+
+    obp.table.push({keys : authNum});
+    var doObp = JSON.stringify(obp);
+    fs.writeFileSync('keyimpress.json',doObp);
+
+    // const key = { keys : authNum};
+    // const dokey = JSON.stringify(key);
+    // fs.writeFileSync('keyimpress.json',dokey);
+    // fs.read
     ejs.renderFile(appDir+'/template/authMail.ejs', {authCode : authNum}, function (err, data) { //랜덤번호를 authCode로 authMail로 보낸다.
       if(err){console.log(err)}
       emailTemplete = data;
