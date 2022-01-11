@@ -30,10 +30,10 @@
             <input type = "text" class = "box_context idbox">
             <button class = "id_check">중복확인</button> </div>
         
-        <div class = "input_text_box"><span class="register_title">비밀번호</span>
-            <input type = "text" class = "box_context passbox"> </div>
+        <div class = "input_text_box" ><span class="register_title">비밀번호</span>
+            <input type = "password" class = "box_context passbox"><span class ="hiddenpwd"></span></div>
         <div class = "input_text_box"><span class="register_title">닉네임</span>
-            <input type = "text" class = "box_context"> </div>
+            <input type = "text" class = "box_context nnamebox"> </div>
             <div class = "float_right"><button class = "register_ok">가입</button></div>
           </div>
         
@@ -126,25 +126,10 @@
 
         });
       
-        $('.register_ok').click(function(e){
 
-          var register_check = false;
-
-          if (mail_check == false) {
-
-            alert ('메일 인증을 진행 해 주세요.');
-          }
-          
-          if (id_check == false) {
-
-            alert ('아이디 중복검사를 진행 해 주세요.');
-          }
-
-
-          
-        })
       
         var oldVal;
+        var passvalid = false;
         //function passcheck(){
           $('.passbox').on("propertychange change keyup paste input", function(){
           var passwords = $('.passbox').val();
@@ -155,20 +140,55 @@
           }
           oldVal = currentVal;
           //alert('바뀜');
-
-          if(passwords.match("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"))
+          var passwordRule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+          if(passwordRule.test(passwords))
           {
-            //alert('하이3');
+            //alert('하이2');
+            $('.passbox').css('border', '1px green solid');
+            $('.hiddenpwd').text("사용가능한 패스워드입니다.");
+            $('.hiddenpwd').css('color','#44da31' );
+            passvalid = true;
           }
           else{
             $('.passbox').css('border', '1px #d33636 solid');
-
+            $('.hiddenpwd').text("비밀번호는 8자리 이상의 숫자+문자 조합이어야 합니다.");
+            $('.hiddenpwd').css('font-size','15px' );
+            $('.hiddenpwd').css('margin-left','30px' );
+            $('.hiddenpwd').css('color','red' );
             //alert('하이1');
+            passvalid = false;
           }
          
         });
         
 
+
+
+        $('.register_ok').click(function(e){
+
+          var register_check = false;
+          var nname = $('.nnamebox').val();
+          if (mail_check == false) {
+
+            alert ('메일 인증을 진행 해 주세요.');
+          }
+
+          if (id_check == false) {
+
+            alert ('아이디 중복검사를 진행 해 주세요.');
+          }
+
+          if (passvalid == false){
+
+            alert ('패스워드를 확인하세요');
+          }
+
+          if (!nname){
+
+            alert ('닉네임을 확인하세요');
+          }
+
+          })
         </script>
 
 
