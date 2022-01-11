@@ -64,7 +64,7 @@
 
           }).done(function(rep){ // 성공의 경우. 
           
-           alert(rep.authbutton);
+           alert(rep.result);
            authcodes = rep.authbutton;
             //alert(JSON.stringify(rep.authcode));
             //alert(rep.authbutton);
@@ -115,7 +115,7 @@
             
             alert(rep.result);
            
-            idcheck = rep.dupcheck;
+            id_check = rep.dupcheck;
 
             
 
@@ -188,6 +188,30 @@
             alert ('닉네임을 확인하세요');
           }
 
+          if (mail_check == true && id_check == true && passvalid == true && nname){
+            
+            var sendMail = $('.mailbox').val();
+            var sendId = $('.idbox').val();
+            var sendPass = $('.passbox').val();
+            var sendNname = $('.nnamebox').val();
+            $.ajax({
+              method : 'POST',
+              url : '/accountfunc/register',
+              data : {receiveMail : sendMail,
+                      receiveId : sendId,
+                      receivePass : sendPass,
+                      receiveNname : sendNname}
+
+            }).done(function(rep){
+
+              alert (rep.result);
+              if(rep.valid = true){
+
+                location.replace('./thread/thread_list');
+              }
+            })
+
+          }
           })
         </script>
 

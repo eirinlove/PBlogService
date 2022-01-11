@@ -3,6 +3,7 @@ var router = require('express').Router();
 const CheckEmail = require("../public/js/emailerrorchk");
 const { post } = require('./thread');
 const authViewers = require("../public/js/authViewer");
+const cryptpass = require ("../function/crypto");
 
 
 router.post('/emailcheck', function(req,res){
@@ -65,7 +66,7 @@ router.post('/idcheck', function(req,res){
         else {
 
            var result = "가입하셔도 좋습니다.";
-           var dupcheck = "ok";
+           var dupcheck = true;
            res.send({result:result, dupcheck:dupcheck});
         }
         
@@ -77,4 +78,33 @@ router.post('/idcheck', function(req,res){
 
 })
 
+
+router.post('/register', function(req,res){
+
+database.collection('thread_counter').findOne({count : '카운트'}, function(err, context){
+
+
+
+var usrNum = context.totalUser;
+var crypedpass = cryptpass.renderFunc(req.body.receivePass);
+var saveinfo = { usr_id : req.body.receiveId,
+                 usr_pw : crypedpass,
+                 usr_email : req.body.receiveMail,
+                 usr_Nname : req.body.receiveNname,
+                 usr_addr : usrNum + 1}
+
+database.collection('user').insertOne(saveinfo, function(err, context){
+
+    database.collection('thread_counter').updateOne({count : '카운트'}, { $inc: {totalUser:1}}, function(err,context){
+
+
+        var result = '등록완료되었습니다';
+        var valid = true;
+        res.send({result:result, valid:valid});
+    })
+
+
+})
+})
+})
 module.exports=router;
