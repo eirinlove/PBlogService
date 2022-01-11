@@ -41,5 +41,9 @@ width :126px;
 .register_ok{
 
 
+}
 
+.passbox{
+
+ outline:none;   /* inputbox, 눌렀을때 강조되는 outline 제거*/
 }
