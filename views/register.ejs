@@ -126,7 +126,23 @@
 
         });
       
-    
+        $('.register_ok').click(function(e){
+
+          var register_check = false;
+
+          if (mail_check == false) {
+
+            alert ('메일 인증을 진행 해 주세요.');
+          }
+          
+          if (id_check == false) {
+
+            alert ('아이디 중복검사를 진행 해 주세요.');
+          }
+
+
+          
+        })
       
 
 
