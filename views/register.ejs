@@ -10,6 +10,8 @@
     <link rel = "stylesheet" type="text/css" href= "/public/css/thread_view.css">
     <link rel = "stylesheet" type="text/css" href= "/public/css/register.css">
     <script type="text/JavaScript" src="/function/mailpass.js" ></script>
+    
+
     <title>회원가입</title>
 
 
@@ -22,17 +24,19 @@
         <div class = "register_id_inputbox">
         <div class = "input_text_box"><span class="register_title">메일주소</span>
             <input type = "text" class = "box_context mailbox"> <button class = "mail_check">인증요청</button>
-                <input type = "text" class = "mail_number_box"> <button class = "mail_check">인증확인</button></div>
+                <input type = "text" class = "mail_number_box"> <button class = "mail_check_object">인증확인</button></div>
        
         <div class = "input_text_box"><span class="register_title">아이디</span>
-            <input type = "text" class = "box_context">
-            <button class = "mail_check">중복확인</button> </div>
+            <input type = "text" class = "box_context idbox">
+            <button class = "id_check">중복확인</button> </div>
         
         <div class = "input_text_box"><span class="register_title">비밀번호</span>
             <input type = "text" class = "box_context"> </div>
         <div class = "input_text_box"><span class="register_title">닉네임</span>
             <input type = "text" class = "box_context"> </div>
-        </div>
+            <div class = "float_right"><button class = "register_ok">가입</button></div>
+          </div>
+        
     </div>
     </div>
 
@@ -42,7 +46,10 @@
 
     <script>
         var authcodes;
-       
+        var idcodes;
+        var mail_check = false;
+        var id_check = false;
+
 
         $('.mail_check').click(function(e){ //jquery로 가져옴.클릭함수를.
             
@@ -57,10 +64,11 @@
 
           }).done(function(rep){ // 성공의 경우. 
           
-           //alert(rep.result);
+           alert(rep.authbutton);
+           authcodes = rep.authbutton;
             //alert(JSON.stringify(rep.authcode));
-             alert(rep.authcode);
-             authcodes = rep.authcode;
+            //alert(rep.authbutton);
+
           }).fail(function(xhr, textStatus, errorThrown){ //실패시,
             alert('메일을 보내지못했습니다. 다시 시도하세요.');
             console.log(xhr, textStatus, errorThrown);
@@ -69,9 +77,59 @@
         });
 
 
+        $('.mail_check_object').click(function(e){ //jquery로 가져옴.클릭함수를.
+          
+          let mailAuthData = $('.mail_number_box').val();
+         
+          if (authcodes == mailAuthData){
 
+            alert ("메일인증이 완료되었습니다.");
+            mail_check = true;
+            
+          }
+
+          else if(!authcodes){
+
+            alert ("메일인증이 필요합니다.");
+          }
+
+          else {
+            alert ("인증번호가 불일치합니다.")
+          }
+        });
+
+
+        $('.id_check').click(function(e){ 
+            
+            let data = $('.idbox').val();
+            
+            
+            $.ajax({
+            method : 'POST',
+            url : '/accountfunc/idcheck',
+            data : { usrid : data } // 123을 /delete 경로로 보낸다. , req.body로 받는다. , 즉 위의 postoren이 server.js의 req.body._id가 됨.
+            // _id_a 는 오브젝트id 
+
+          }).done(function(rep){ // 성공의 경우. 
+          
+            
+            alert(rep.result);
+           
+            idcheck = rep.dupcheck;
+
+            
+
+          }).fail(function(xhr, textStatus, errorThrown){ //실패시,
+            alert('다시 입력하십시요');
+            console.log(xhr, textStatus, errorThrown);
+          });
+
+        });
       
     
+      
+
+
         </script>
 
 
