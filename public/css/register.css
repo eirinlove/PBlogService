@@ -49,3 +49,23 @@ width :126px;
 
  
 }
+
+
+.modify_pass_check{
+
+text-align: center;
+
+}
+
+
+.span_block{
+
+    display : block;
+    margin-bottom : 10px;
+}
+
+.modify_pass_input_form{
+
+margin-right: 10px;
+font-family : 고딕;
+}
