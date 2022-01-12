@@ -442,6 +442,10 @@ app.post('/passtest', function(req,res){  //POST요청 받음
 });
 
 
+app.get('/modifyUsr', function(req,res){
+
+        res.render('modifyUserInfo.ejs', {});
+})
 
 
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
