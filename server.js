@@ -245,7 +245,7 @@ passport.use(new LocalStrategy({
           if (에러) return done(에러)
       
           if (!결과) return done(null, false, { message: '존재하지않는 아이디요' }) // done(서버에러, 성공시 사용자 DB데이터, 에러메시지) 
-          if (입력한비번 == 결과.usr_pw) { // 암호화 하여야 함 
+          if (cryp.renderFunc(입력한비번) == 결과.usr_pw) { // 암호화 하여야 함 
             return done(null, 결과)
           } else {
             return done(null, false, { message: '비번틀렸어요' })
