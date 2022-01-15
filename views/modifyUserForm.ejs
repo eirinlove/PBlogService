@@ -15,45 +15,33 @@
   <body>
     <%- include('nav.ejs') %>
     
-    <div class = "article_area">
-    <div class = "register_id_boxform modify_pass_check_form">
-    <div class = "register_id_inputbox modify_pass_check">
-    <span class = "span_block">정보수정을 위해 비밀번호를 확인합니다.</span>
-    <input type="text" class = "modify_pass_input_form"><button class = "modify_pwcheck_send"> 입력</button>
-    <input type="hidden" class = "usrIdHidden" value="<%=userid%>"></input>
+    <div class ="article_area">
+        <div class ="register_id_boxform">
+            <div class = "register_id_inputbox">
+            <div class = "input_text_box"><span class="register_title">메일주소</span>
+                <input type = "text" class = "box_context mailbox" value = "<%=email%>" disabled></div>
+           
+            <div class = "input_text_box"><span class="register_title" >아이디</span>
+                <input type = "text" class = "box_context idbox" value = "<%=id%>" disabled></div>
+            
+            <div class = "input_text_box" ><span class="register_title">비밀번호</span>
+                <input type = "password" class = "box_context passbox"><span class ="hiddenpwd"></span>
+            <span class = "password_re">확인<input type = "password" class ="box_context box_context_2row passbox_check"></span> </div>
+            <div class = "input_text_box"><span class="register_title">닉네임</span>
+                <input type = "text" class = "box_context nnamebox"> </div>
+                <div class = "float_right"><button class = "register_ok">가입</button></div>
+              </div>
+            
+        </div>
+        </div>
 
-  
 
-    </div>
-    </div>
-    </div>
+        <script>
+
+            
+        </script>
 
 
-<script>
-
-$('.modify_pwcheck_send').click(function(e){
-  let pwData = $('.modify_pass_input_form').val();
-  let idData
-
-$.ajax({
-            method : 'POST',
-            url : '/accountfunc/modifyUsr_checkpw',
-            data : { checkpw : pwData,
-                     checkid : idData }
-}).done(function(rep){ // 성공의 경우. 
-          
-            if (rep.result == "ok"){
-
-              location.replace('/accountfunc/modifyusr_checkok');
-            }
-            else {
-          alert(rep.result);}
-        
-         
-
-        })
-})
-  </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
 
