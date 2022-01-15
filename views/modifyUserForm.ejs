@@ -37,6 +37,44 @@
 
 
         <script>
+            // var firstpw = $('.passbox').val();
+            // var secondpw 
+            
+            $('.register_ok').click(function(e){
+
+                if ($('.passbox').val() == $('.passbox_check').val() ){
+
+                    if ($('.nnamebox').val()){
+
+                        $.ajax({
+                            method : 'POST',
+                            url : '/accountfunc/modifyProcess',
+                            data : {pwdata : $('.passbox').val(),
+                                    nnamedata : $('.nnamebox').val()}
+                        }).done(function(rep){
+                            alert ('정보변경에 성공하였습니다, 다시 로그인하여 주세요')
+                            location.replace('/')
+                        })
+                    }
+
+                    else{
+
+                        $.ajax({
+                            method : 'POST',
+                            url : '/accountfunc/modifyProcess',
+                            data : {pwdata : $('.passbox').val()}
+                        }).done(function(rep){
+                            alert ('정보변경에 성공하였습니다, 다시 로그인하여 주세요')
+                            location.replace('/')
+                        })
+
+                    }
+                }
+
+                else {
+                    alert ('비밀번호가 일치하지 않습니다.');
+                }
+            })
 
             
         </script>

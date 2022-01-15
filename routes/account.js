@@ -137,4 +137,31 @@ router.get('/modifyusr_checkok', function(req,res){
                                       id : req.user.usr_id})
 
 })
+
+
+router.post('/modifyProcess', function(req,res){
+
+    if ( req.body.pwdata && req.body.nnamedata){
+
+        console.log(req.body.pwdata +" "+req.body.nnamedata);
+        database.collection('user').updateOne({usr_id : req.user.usr_id}, 
+            {$set :{ usr_pw : cryptpass.renderFunc(req.body.pwdata), usr_Nname : req.body.nnamedata  }}, function(err, context){
+        var result =  "success";
+        res.send ({result : result});
+                
+            })
+    }
+    else {
+
+        database.collection('user').updateOne({usr_id : req.user.usr_id}, 
+            {$set :{ usr_pw : cryptpass.renderFunc(req.body.pwdata)  }}, function(err, context){
+        var result =  "success";
+        res.send ({result : result});
+                
+            })  
+
+
+    }
+
+})
 module.exports=router;
