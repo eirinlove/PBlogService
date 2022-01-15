@@ -444,7 +444,7 @@ app.post('/passtest', function(req,res){  //POST요청 받음
 
 app.get('/modifyUsr', function(req,res){
 
-        res.render('modifyUserInfo.ejs', {});
+        res.render('modifyUserInfo.ejs', {userid : req.user.usr_id});
 })
 
 

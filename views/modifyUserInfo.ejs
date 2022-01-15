@@ -13,20 +13,40 @@
   </head>
   <body>
     <%- include('nav.ejs') %>
-
+    
     <div class = "article_area">
     <div class = "register_id_boxform modify_pass_check_form">
     <div class = "register_id_inputbox modify_pass_check">
     <span class = "span_block">정보수정을 위해 비밀번호를 확인합니다.</span>
-    <input type="text" class = "modify_pass_input_form"><button> 입력</button>
+    <input type="text" class = "modify_pass_input_form"><button class = "modify_pwcheck_send"> 입력</button>
+    <input type="hidden" class = "usrIdHidden" value="<%=userid%>"></input>
+
+  
 
     </div>
     </div>
     </div>
 
 
+<script>
 
+$('.modify_pwcheck_send').click(function(e){
+  let pwdata = $('.modify_pass_input_form').val();
 
+$.ajax({
+            method : 'POST',
+            url : '/accountfunc/modifyUsr_checkpw',
+            data : { checkpw : pwdata }
+}).done(function(rep){ // 성공의 경우. 
+          
+            
+          alert(rep.result);
+         
+         
+
+        })
+})
+  </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
 

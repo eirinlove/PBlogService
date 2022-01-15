@@ -107,4 +107,14 @@ database.collection('user').insertOne(saveinfo, function(err, context){
 })
 })
 })
+
+router.post('/modifyUsr_checkpw', function(req,res){
+
+    database.collection('user').findOne({usr_id: req.body.usrid}, function(err, context){
+
+
+    })
+
+})
+
 module.exports=router;
