@@ -110,11 +110,31 @@ database.collection('user').insertOne(saveinfo, function(err, context){
 
 router.post('/modifyUsr_checkpw', function(req,res){
 
-    database.collection('user').findOne({usr_id: req.body.usrid}, function(err, context){
+    database.collection('user').findOne({usr_id: req.user.usr_id}, function(err, context){
 
+
+        if ( context.usr_pw == cryptpass.renderFunc(req.body.checkpw) ) {
+
+            var result  = "ok";
+            res.send({result : result});
+        }
+
+        else {
+
+            var result = "비밀번호를 확인해주세요.";
+            res.send({result : result});
+        }
+       
 
     })
 
 })
 
+
+router.get('/modifyusr_checkok', function(req,res){
+
+    res.render('modifyUserForm.ejs', {email : req.user.usr_email,
+                                      id : req.user.usr_id})
+
+})
 module.exports=router;
