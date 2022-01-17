@@ -40,7 +40,8 @@ router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는
         var userdata = req.user.usr_id; 
         res.render('thread_view.ejs', { postlist : context,
             gotime : timestamps.renderFunc,
-            userdata : userdata});  //timestamp js 에서 renderFunc 통해서 보낸것}
+            userdata : userdata,
+            thread_data : req.params.thread_id});  //timestamp js 에서 renderFunc 통해서 보낸것}
         }
 
         else {
@@ -48,7 +49,8 @@ router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는
             var userdata = null;
             res.render('thread_view.ejs', {postlist : context,
                                            gotime : timestamps.renderFunc,
-                                           userdata : userdata})
+                                           userdata : userdata,
+                                           thread_data : req.params.thread_id})
         }
 
 
