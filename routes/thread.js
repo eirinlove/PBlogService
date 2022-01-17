@@ -63,12 +63,28 @@ router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는
 });
 
 
-// ---------------- 글쓰기  -------------- //
+// ---------------- 글쓰기 페이지 이동 -------------- //
 router.get('/thread:thread_id/postWrite', function(req, res){ // thread_view의 post_write href로부터 옴
 
 
     res.render('postWrite.ejs', {thread_data : parseInt(req.params.thread_id) // 쓰레드 타이틀 표시용
         ,thread_list : titleviewer.renderFunc});  // 함수 
+
+});
+
+
+router.post('/thread:thread_id/postWriteOk', function(req,res){
+
+
+    
+    database.collection('thread_post').insertOne(saveinfo, function(err, context){
+
+
+
+        location.href ('/thread:thread_id'); // 글 쓴 후 해당 스레드 페이지로 이동
+    });
+
+    
 
 });
 
