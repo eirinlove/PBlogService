@@ -134,7 +134,8 @@ router.post('/modifyUsr_checkpw', function(req,res){
 router.get('/modifyusr_checkok', function(req,res){
 
     res.render('modifyUserForm.ejs', {email : req.user.usr_email,
-                                      id : req.user.usr_id})
+                                      id : req.user.usr_id
+                                      })
 
 })
 
