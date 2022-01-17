@@ -75,20 +75,28 @@ router.get('/thread:thread_id/postWrite', function(req, res){ // thread_view의 
 
 router.post('/thread:thread_id/postWriteOk', function(req,res){
 
+    database.collection('thread_counter').findOne({count: '카운트'}, function(err, context){
 
+    postNum = context.totalPost;
+    let today = new Date();
+    var saveinfo  = {post_id : postNum+1, usr_id : req.user.usr_id, post_name : req.body.titleData, post_context : req.body.contextData,
+                     thread_id : req.params.thread_id, post_Viewer : 0, comment : 0, date : timestamps(today) }
+
+    database.collection('thread_post').insertOne(saveinfo, function(err, context_2){
+
+        database.collection('thread_counter').updateOne({count : '카운트'}, { $inc : {totalPost :1}}, function(err, context_3){
+
+            location.href ('/thread:thread_id'); // 글 쓴 후 해당 스레드 페이지로 이동
+        })
     
-    database.collection('thread_post').insertOne(saveinfo, function(err, context){
-
-
-
-        location.href ('/thread:thread_id'); // 글 쓴 후 해당 스레드 페이지로 이동
+ 
     });
 
     
 
 });
 
-
+})
 
 
 // ------------- 포스트 확인 ---------------// 맨 나중에 넣어야 함 (post_id 문자열 인식때문에)
@@ -101,7 +109,7 @@ router.get('/thread:thread_id/:post_id', function(req, res){ // : 로, 사용자
             res.render('postDetail.ejs', {postData : context,
                                             postlist : context_another,
                                             gotime : timestamps.renderFunc,
-                                            thread_list : titleviewer.renderFunc}); // data object를 정의해서 detail.ejs 에서 읽어올 수 있게 함.
+                                            thread_list : titleviewer.renderFunc});
 
             //응답.render('detail.ejs', {이런 이름으로 : 이런 데이터를}) ejs파일은 render를 해줘야 하니 필수
         })
