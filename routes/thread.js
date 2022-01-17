@@ -36,9 +36,21 @@ router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는
 
         //console.log(req.params.id);
         console.log(context);
-
+        if (req.user){
+        var userdata = req.user.usr_id; 
         res.render('thread_view.ejs', { postlist : context,
-                                        gotime : timestamps.renderFunc});  //timestamp js 에서 renderFunc 통해서 보낸것
+            gotime : timestamps.renderFunc,
+            userdata : userdata});  //timestamp js 에서 renderFunc 통해서 보낸것}
+        }
+
+        else {
+
+            var userdata = null;
+            res.render('thread_view.ejs', {postlist : context,
+                                           gotime : timestamps.renderFunc,
+                                           userdata : userdata})
+        }
+
 
         
 
@@ -50,10 +62,10 @@ router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는
 
 
 // ---------------- 글쓰기  -------------- //
-router.get('/thread:thread_id/post_write', function(req, res){ // thread_view의 post_write href로부터 옴
+router.get('/thread:thread_id/postWrite', function(req, res){ // thread_view의 post_write href로부터 옴
 
 
-    res.render('post_write.ejs', {thread_data : parseInt(req.params.thread_id) // 쓰레드 타이틀 표시용
+    res.render('postWrite.ejs', {thread_data : parseInt(req.params.thread_id) // 쓰레드 타이틀 표시용
         ,thread_list : titleviewer.renderFunc});  // 함수 
 
 });
