@@ -100,6 +100,16 @@ router.post('/thread:thread_id/postWriteOk', function(req,res){
 
 })
 
+router.post('/thread/testwrite', function(req, res){
+
+var saveinfo = { post_name : req.body.name, post_context : req.body.context  }
+database.collection('post_test').insertOne(saveinfo, function(err, context){
+
+
+})
+
+})
+
 
 // ------------- 포스트 확인 ---------------// 맨 나중에 넣어야 함 (post_id 문자열 인식때문에)
 router.get('/thread:thread_id/:post_id', function(req, res){ // : 로, 사용자가 입력한 문자[패러미터] 받음 .
