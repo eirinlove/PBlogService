@@ -34,7 +34,8 @@
         <span class = "content_viewer">조회수: <%=postData.post_Viewer%></span>
         <span class = "content_todate">작성일: <%=gotime(postData.date)%></span>
       </div>
-      <div class = "content_context_box"><%=postData.post_context%></div>
+      <div class = "content_context_box"></div> <!--<%=postData.post_context%>-->
+      <input type = "hidden" class = "hiddenContext" value = "<%=postData.post_context%>">
     </div>
 
     
@@ -72,14 +73,20 @@
 
       
 
+  <script>
+$(document).ready(function(){
 
+var contextData = $('.hiddenContext').val();
+$('.content_context_box').html(contextData);
+// var chang = document.getElementsByClassName('content_context_box');
+// chang[0].innerHTML = contextData; 
+
+})
+  </script>
 
         </script>
 
-        <div class="appending_file_box">
-          <strong>원본 첨부파일 <em class="font_red">1</em></strong>						<ul class="appending_file">
-            <li><a href="https://image.dcinside.com/download.php?no=24b0d769e1d32ca73deb82fa11d028316c04369a2e349766dc7643c7549d2184f93419d478b5544f99a53ec5775d52a0cfcbc1d7cbc626b75784859c933794b98261d19dfd8e37c8038aed0ba80058dbd7b94c8a17529f883d08c3d0ab38ff73176ee2cfb0c19dbaca3102acb3de86&amp;f_no=Screenshot_20211215-104312_Samsung%2BInternet.jpg">Screenshot_20211215-104312_Samsung+Internet.jpg</a></li>						</ul>
-        </div>
+
       <!-- EJS를 사용해서 GET요청 해서 데이터 받아오기-->
     <!-- Optional JavaScript; choose one of the two! -->
 
