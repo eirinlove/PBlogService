@@ -1,7 +1,8 @@
 .content_view_box{
    
     width: 850px;
-    height: 500px;
+    min-height : 500px;
+    height: auto;
     background-color: red;
 }
 
@@ -38,4 +39,9 @@
 .content_todate{
     display:inline-block;
     width: 100px;
+}
+
+.content_context_box{
+
+    height: auto;
 }

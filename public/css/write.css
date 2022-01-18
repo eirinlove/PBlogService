@@ -21,3 +21,14 @@
     height: 500px;
     margin-left:0px;
 }
+
+.note-form-control{
+    
+    padding : 0px;
+    margin-left : 0px;
+}
+
+.note-modal-footer{
+    padding : 50px;
+    
+}

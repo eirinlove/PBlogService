@@ -12,6 +12,42 @@ MongoClient.connect(process.env.DB_URL, function(err, client){
 
 
 
+// ---- multer ----- ////
+
+
+let multer = require('multer');
+var storage = multer.diskStorage({
+        destination : function(req, file, cb){
+
+                cb(null, './public/images') //출력 경로 정의
+        },
+        filename : function(req, file, cb){
+                cb(null, file.originalname) //출력 파일명 정의
+        
+
+        }
+}); // memoryStorage는 휘발성, diskStorage는 비휘발성
+var path = require('path');
+
+var upload = multer({storage : storage
+    ,
+    fileFilter : function(req, file, cb){
+            var ext = path.extname(file.originalname);
+            if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg'){ // jpeg,jpg,png로 끝나는 파일 검사.
+                    return cb(new Error('PNG, JPEG만 허용됩니다.'))
+            }
+            cb(null, true);
+
+    },
+    limits:{
+            fileSize: 2048 * 2048 //파일 사이즈, 최대 2MB.
+    }});
+
+
+
+// ------------------- //
+
+
 
 router.get('/thread_view2', function(req,res){
 
@@ -100,15 +136,25 @@ router.post('/thread:thread_id/postWriteOk', function(req,res){
 
 })
 
-router.post('/thread/testwrite', function(req, res){
 
-var saveinfo = { post_name : req.body.name, post_context : req.body.context  }
-database.collection('post_test').insertOne(saveinfo, function(err, context){
+router.post('/thread:thread_id/upload-image', upload.single('img'), (req,res) => { //이미지 업로드
 
-
+    //res.render('./test/typetest.ejs',{});
+    console.log(req.file);
+    let response = {}
+    response.url  = `/images/${path.basename(req.file.path)}`
+    res.json(response);
 })
 
-})
+// router.post('/testwrite', function(req, res){
+
+// var saveinfo = { post_name : req.body.name, post_context : req.body.context  }
+// database.collection('post_test').insertOne(saveinfo, function(err, context){
+
+
+// })
+
+// }) 이부분 typetest 부분
 
 
 // ------------- 포스트 확인 ---------------// 맨 나중에 넣어야 함 (post_id 문자열 인식때문에)
