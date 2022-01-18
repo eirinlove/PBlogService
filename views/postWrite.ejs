@@ -66,12 +66,16 @@
 
           $.ajax({
                     method : 'POST',
-                    url : '/thread<%=thread_data%>/postWriteOK',
+                    url : '../thread<%=thread_data%>/postWriteOk',
                     data : {titleData : $('.input_text_title').val(),
                             contextData : $('.input_text_context').val()}
 
 
-          })
+          }).done(function(rep){
+
+                  location.replace('../thread<%=thread_data%>');
+                
+                })
 
          
         }

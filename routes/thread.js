@@ -78,15 +78,17 @@ router.post('/thread:thread_id/postWriteOk', function(req,res){
     database.collection('thread_counter').findOne({count: '카운트'}, function(err, context){
 
     postNum = context.totalPost;
-    let today = new Date();
+    let today =+ new Date();
     var saveinfo  = {post_id : postNum+1, usr_id : req.user.usr_id, post_name : req.body.titleData, post_context : req.body.contextData,
-                     thread_id : req.params.thread_id, post_Viewer : 0, comment : 0, date : timestamps(today) }
+                     thread_id : parseInt(req.params.thread_id), post_Viewer : 0, comment : 0, date : today }
 
     database.collection('thread_post').insertOne(saveinfo, function(err, context_2){
 
         database.collection('thread_counter').updateOne({count : '카운트'}, { $inc : {totalPost :1}}, function(err, context_3){
 
-            location.href ('/thread:thread_id'); // 글 쓴 후 해당 스레드 페이지로 이동
+            var result = "ok";
+            res.send ({result:result});
+            //location.href ('/thread:thread_id'); // 글 쓴 후 해당 스레드 페이지로 이동
         })
     
  
