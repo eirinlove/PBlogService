@@ -447,6 +447,10 @@ app.get('/modifyUsr', function(req,res){
         res.render('modifyUserInfo.ejs', {userid : req.user.usr_id});
 })
 
+app.get('/typetest', function(req,res){
+
+        res.render('./test/typetest.ejs',{});
+})
 
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
 app.use('/board/sub', require('./routes/board.js')); 
