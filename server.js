@@ -452,6 +452,15 @@ app.get('/typetest', function(req,res){
         res.render('./test/typetest.ejs',{});
 })
 
+app.post('/upload-image', upload.single('img'), (req,res) => {
+
+        //res.render('./test/typetest.ejs',{});
+        console.log(req.file);
+        let response = {}
+        response.url  = `/images/${path.basename(req.file.path)}`
+        res.json(response);
+})
+
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
 app.use('/board/sub', require('./routes/board.js')); 
 app.use('/thread', require('./routes/thread.js'));
