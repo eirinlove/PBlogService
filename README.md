@@ -6,7 +6,7 @@ Nodejs 토론 스레드 서비스 개발
 
 1차 연장기간 : 1월 4일 ~ 1월 14일
 2차 연장기간 : ~ 1월 17일 ( ~ 스레드 CRUD 관련 기능 )
-* 개발 플랫폼 : Node.js , Express.js, javascript, AJAX,  MongoDB , Github, Nginx
+* 개발 플랫폼 : Node.js , Express.js, summernote.js, javascript, AJAX,  MongoDB , Github, Nginx
  
 * Module : NodeMailer, Path, ejs, crypto, mongodb, socketio, multer, dotenv, 
   
