@@ -162,6 +162,7 @@ router.post('/thread:thread_id/upload-image', upload.single('img'), (req,res) =>
 router.post('/deleteCheck', function(req,res){
 
 
+    
 
 })
 
