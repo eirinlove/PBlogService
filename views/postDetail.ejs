@@ -29,14 +29,18 @@
         <%= postData.post_name %>
       </div>
       <div class= "content_info_box">
-        <span class = "content_user_info"><%=postData.usr_id%></span>
+        <span class = "content_user_info"><%=postData.usr_Nname%></span>
         <span class = "content_comment">댓글: <%=postData.comment%></span>
         <span class = "content_viewer">조회수: <%=postData.post_Viewer%></span>
         <span class = "content_todate">작성일: <%=gotime(postData.date)%></span>
       </div>
       <div class = "content_context_box"></div> <!--<%=postData.post_context%>-->
       <input type = "hidden" class = "hiddenContext" value = "<%=postData.post_context%>">
+      <div class = "content_voteRecommend"><button class = "voteRecommend_position">추천</button></div>
+      <div class = "content_mainFunction"> <button class = "function_position postModify">수정</button> <button class = "function_position postDelete">삭제</button></div>
     </div>
+    <div class = "content_commentArea"></div>
+    
 
     
 
@@ -60,7 +64,7 @@
           <a class = content_row href = "<%= postlist[i].post_id %>"><%}%>
           <span class= "postNumber"><%=postlist[i].post_id%></span>
           <span class= "postTitle"><%=postlist[i].post_name%></span>
-          <span class= "postAuthor"><%=postlist[i].usr_id%></span>
+          <span class= "postAuthor"><%=postlist[i].usr_Nname%></span>
           <span class= "postTime"><%=gotime(postlist[i].date)%></span>
           <span class= "postView"><%=postlist[i].post_Viewer%></span>
           </a> <%}%>
@@ -74,12 +78,33 @@
       
 
   <script>
+
+
+
+
+
 $(document).ready(function(){
 
 var contextData = $('.hiddenContext').val();
 $('.content_context_box').html(contextData);
 // var chang = document.getElementsByClassName('content_context_box');
 // chang[0].innerHTML = contextData; 
+
+// DB에 저장된부분을 hiddenContext로 받아, View상에 뿌려줌.
+
+})
+
+
+$('.postDelete').click(function(e){
+
+  $.ajax({
+            method : 'POST',
+            url : '/thread/deleteCheck',
+            data : { mail : data } // 123을 /delete 경로로 보낸다. , req.body로 받는다. , 즉 위의 postoren이 server.js의 req.body._id가 됨.
+            // _id_a 는 오브젝트id 
+
+          })
+
 
 })
   </script>

@@ -157,6 +157,17 @@ router.post('/thread:thread_id/upload-image', upload.single('img'), (req,res) =>
 // }) 이부분 typetest 부분
 
 
+
+
+router.post('/deleteCheck', function(req,res){
+
+
+
+})
+
+
+
+
 // ------------- 포스트 확인 ---------------// 맨 나중에 넣어야 함 (post_id 문자열 인식때문에)
 router.get('/thread:thread_id/:post_id', function(req, res){ // : 로, 사용자가 입력한 문자[패러미터] 받음 .
 
@@ -173,6 +184,7 @@ router.get('/thread:thread_id/:post_id', function(req, res){ // : 로, 사용자
         })
     })
 });
+
 
 
 

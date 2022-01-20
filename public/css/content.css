@@ -45,3 +45,39 @@
 
     height: auto;
 }
+
+.content_voteRecommend{
+    text-align : center;
+    height : 50px;
+    background-color:cornsilk;
+}
+
+
+.voteRecommend_position{
+
+    width : 50px;
+}
+
+.content_mainFunction{
+
+    
+    display : block;
+    text-align : right; /* 엘리먼트 우측 정렬 */
+    
+    height : 50px;
+    background-color : gray;
+    
+}
+
+.function_position{
+   
+    width: 50px;
+    margin-right :30px;
+
+}
+
+.content_commentArea{
+
+    height :  50px;
+    background-color: darkorange;
+}
