@@ -49,7 +49,7 @@
           <span class= "postAuthor"><%=postlist[i].usr_Nname%></span>
           <span class= "postTime"><%=gotime(postlist[i].date)%></span>
           <span class= "postView"><%=postlist[i].post_Viewer%></span>
-          </a>  <span class ="postDelete_admin"><a class = "postDelete_check"  href ="#" data-object ="<%= postlist[i].post_id %>">삭제</a></span><%}%>
+          </a><%if (viewAuth == "admin"){%>  <span class ="postDelete_admin"><a class = "postDelete_check"  href ="#" data-object ="<%= postlist[i].post_id %>">삭제</a></span><%}}%>
          
 
         </div>
