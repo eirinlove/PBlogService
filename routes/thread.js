@@ -159,10 +159,51 @@ router.post('/thread:thread_id/upload-image', upload.single('img'), (req,res) =>
 
 
 
-router.post('/deleteCheck', function(req,res){
+router.get('/deleteCheck/:postId', function(req,res){
 
+var postId = parseInt(req.params.postId);
+
+//console.log('유저ID :'+req.user.usr_id + '실제 ID :' + userId);
+console.log ('포스트아이디'+postId);
+database.collection('thread_post').findOne({post_id:postId}, function(err, context){
+
+    var userId = context.usr_id;
+    var threadId = context.thread_id;
+   
+    if (userId == req.user.usr_id){
+        res.render ('postDelete.ejs', {postId : postId,
+                                       postTitle : context.post_name,
+                                       threadId : threadId});
+    
+        console.log ( '삭제 페이지로 이동');
+        }
+        else {
+            res.redirect('/');
+            
+        }
+
+})
+
+})
+
+router.post('/delete/:postId', function(req,res){
 
     
+    var deleteinfo = { post_id : parseInt(req.body.postId) };
+
+    database.collection('thread_post').deleteOne(deleteinfo, function(err, context){
+
+        database.collection('thread_counter').findOne({count: '카운트'}, function(err, context){
+
+            database.collection('thread_counter').updateOne({count : '카운트'}, { $inc : {totalPost :-1}}, function(err, context_3){
+        var result = "삭제 완료되었습니다.";
+        res.send ({result : result});
+
+            })
+    })
+})
+
+
 
 })
 

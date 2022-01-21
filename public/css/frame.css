@@ -1,0 +1,50 @@
+.dialog_frame{
+
+    margin-left : 35px;
+    margin-top : 35px;
+    width: 650px;
+    height : 315px;
+    border : 2px solid gray;
+    border-radius : 3%;
+    padding : 20px;
+    }
+
+.dialog_title{
+font-size : 22px;
+
+}
+
+.dialog_content{
+
+    padding-bottom : 85px;
+}
+
+.dialog_row{
+
+   color : red;
+}
+
+.dialog_hr{
+border : 1.5px solid gray;
+border-radius: 40%;
+}
+
+.btns{
+    
+    float: right;
+    border:none;
+    width : 70px;
+    height : 35px;
+    background-color: rgba(218, 39, 39, 0.87);
+    color : rgb(241, 241, 241);
+    
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out; /* hover후 돌아올때 0.5초 동안 서서히 색 바뀜 */
+}
+
+.btns:hover{
+    background: rgba(167, 30, 30, 0.787);
+    color: white;
+    transition : background 0.5s ease-out; /* 버튼 누르면 0.5초동안 서서히 색 바뀜 */ 
+}

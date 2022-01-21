@@ -97,13 +97,18 @@ $('.content_context_box').html(contextData);
 
 $('.postDelete').click(function(e){
 
-  $.ajax({
+
+location.replace("/thread/deleteCheck/<%=postData.post_id%>")
+
+
+  /*$.ajax({
             method : 'POST',
-            url : '/thread/deleteCheck',
-            data : { mail : data } // 123을 /delete 경로로 보낸다. , req.body로 받는다. , 즉 위의 postoren이 server.js의 req.body._id가 됨.
+            url : '/thread/thread<%=postData.thread_id%>/deleteCheck',
+            data : { postId : "<%=postData.post_id%>",
+                     userId : "<%=postData.usr_id%>" } // 123을 /delete 경로로 보낸다. , req.body로 받는다. , 즉 위의 postoren이 server.js의 req.body._id가 됨.
             // _id_a 는 오브젝트id 
 
-          })
+          })*/
 
 
 })

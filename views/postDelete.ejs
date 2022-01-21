@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <title>게시글 삭제</title>
+    <link rel = "stylesheet" type="text/css" href= "/public/css/frame.css">
+
+    <style>
+
+        h1{
+
+            margin-left: 50px;
+            margin-top: 50px;
+        }
+        input{
+            margin-left: 50px;
+            width: 500px;
+        }
+        button{
+
+            margin-left: 50px;
+        }
+
+    </style>
+  </head>
+  <body>
+    <%- include('nav.ejs') %>
+    <div class= "dialog_frame">
+
+    <div class = "dialog_title">게시글 삭제</div>
+    <hr class = "dialog_hr">
+    <h6 class = "dialog_content"><%=postTitle%></h6>
+    <div class = "dialog_row">삭제된 글은 복구 불가능합니다.</div>
+    <hr class = "dialog_hr">
+    <button class = "btns btns_deletePost">삭제</button>
+
+    </div>
+    
+
+
+    <script>
+        $('.btns_deletePost').click(function(e){
+
+            $.ajax({
+                method : 'POST',
+                url : '/thread/delete/<%=postId%>',
+                data : { postId : "<%=postId%>"
+                          } // 123을 /delete 경로로 보낸다. , req.body로 받는다. , 즉 위의 postoren이 server.js의 req.body._id가 됨.
+            // _id_a 는 오브젝트id 
+                
+            }).done(function(rep){
+            alert(rep.result);
+            location.replace('../thread<%=threadId%>');
+           
+            })
+
+        })
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    
+  </body>
+</html>
