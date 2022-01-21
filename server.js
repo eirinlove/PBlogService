@@ -185,12 +185,13 @@ res.redirect('/list');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
+const { redirect } = require('express/lib/response');
 app.use(session({secret : '비밀코드', resave : true, saveUninitialized :  false})); 
 app.use(passport.initialize());
 app.use(passport.session()); // 요청과 응답 사이 동작 세션 사용
 
 
-app.get('/login', function(req,res){
+app.get('/logins', function(req,res){
 
         res.render('login.ejs');
 
@@ -267,6 +268,17 @@ passport.use(new LocalStrategy({
          //db에서 위에 있는 user.id로 유저를 찾은 뒤에 유저 정보를 
 
       });
+
+
+      app.get('/logout',  function (req, res){
+
+       req.session.destroy();
+       res.redirect('/');
+      })
+
+       
+       
+
 //세션 해제, 마이페이지등 접속시 
 
 // 세션 라이브러리를 불러오고 미들웨어 설정
@@ -459,6 +471,30 @@ app.post('/upload-image', upload.single('img'), (req,res) => {
         let response = {}
         response.url  = `/images/${path.basename(req.file.path)}`
         res.json(response);
+})
+
+
+
+
+app.get('/loadUserData', function(req,res){
+
+
+        console.log ( "유저 데ㅐ이터 로드");
+        if(req.user){
+        
+                var userData = req.user.usr_id;
+                var userName = req.user.usr_Nname;
+
+                res.send ({userId : userData,
+                          userName : userName});
+        }
+        else {
+
+                var userData = null;
+                var userName = null;
+                res.send ({userId : userData,
+                        userName : userName});
+        }
 })
 
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
