@@ -49,7 +49,8 @@
           <span class= "postAuthor"><%=postlist[i].usr_Nname%></span>
           <span class= "postTime"><%=gotime(postlist[i].date)%></span>
           <span class= "postView"><%=postlist[i].post_Viewer%></span>
-          </a> <%}%>
+          </a>  <span class ="postDelete_admin"><a class = "postDelete_check"  href ="#" data-object ="<%= postlist[i].post_id %>">삭제</a></span><%}%>
+         
 
         </div>
        
@@ -64,8 +65,30 @@
       
 
 
+      <script>
 
-        </script>
+        $('.postDelete_check').click(function(e){
+          
+          var deleteFor = e.target.dataset.object; // 이벤트의 주체안에 다른 태그가 없어야 함
+          //var deleteFor = 1 // 여기 데이터 바인딩이 문제.
+          console.log(deleteFor)
+
+          $.ajax ({
+
+            method : 'DELETE',
+            url : '/thread/deletead/'+deleteFor,
+            data : {postId : deleteFor}
+
+
+          }).done (function(rep){
+            alert(rep.result);
+            location.reload();
+          })
+          
+        })
+
+      </script>
+        
 
         
       <!-- EJS를 사용해서 GET요청 해서 데이터 받아오기-->

@@ -64,6 +64,18 @@ text-align: center;
     
 }
 
+.postDelete_admin{
+
+    color: red;
+    border : 1px solid gray;
+}
+
+.postDelete_check{
+
+    color: red;
+    border : 1px solid gray;
+}
+
 .content_row{
     
   

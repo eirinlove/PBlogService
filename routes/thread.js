@@ -68,29 +68,59 @@ router.get('/thread_list', function(req,res){// 스레드 목록
 
 router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는 게시글 목록. :thread_id 로 thread_id 인자 받아왔음 
 
-    database.collection('thread_post').find({thread_id : parseInt(req.params.thread_id)}).toArray(function(err, context){ // 받은 문자를 받게됨,  위에 get 한 것.  parseint로 String을 Int로 변환
 
-        //console.log(req.params.id);
-        console.log(context);
-        if (req.user){
-        var userdata = req.user.usr_id; 
-        res.render('thread_view.ejs', { postlist : context,
-            gotime : timestamps.renderFunc,
-            userdata : userdata,
-            thread_data : req.params.thread_id});  //timestamp js 에서 renderFunc 통해서 보낸것}
-        }
-
-        else {
-
-            var userdata = null;
-            res.render('thread_view.ejs', {postlist : context,
-                                           gotime : timestamps.renderFunc,
-                                           userdata : userdata,
-                                           thread_data : req.params.thread_id})
-        }
-
+    database.collection('thread_list').findOne({thread_id : parseInt(req.params.thread_id)}, function(err, context){
 
         
+
+    var viewAuth = context.usr_id;
+
+
+
+
+    
+    
+    database.collection('thread_post').find({thread_id : parseInt(req.params.thread_id)}).toArray(function(err, context_2){ // 받은 문자를 받게됨,  위에 get 한 것.  parseint로 String을 Int로 변환
+
+        //console.log(req.params.id);
+        console.log(context_2);
+
+
+       
+        if (req.user){
+
+            if (viewAuth == req.user.usr_id){
+
+        var userdata = req.user.usr_id; 
+        res.render('thread_view.ejs', { postlist : context_2,
+            gotime : timestamps.renderFunc,
+            userdata : userdata,
+            thread_data : req.params.thread_id,
+            viewAuth : "admin"});  //timestamp js 에서 renderFunc 통해서 보낸것}
+        }
+        else {
+            viewAuth = null;
+            var userdata = req.user.usr_id; 
+            res.render('thread_view.ejs', { postlist : context_2,
+                gotime : timestamps.renderFunc,
+                userdata : userdata,
+                thread_data : req.params.thread_id,
+                viewAuth : "user"});
+        }
+    }
+        else {
+            viewAuth = null;
+            var userdata = null;
+            res.render('thread_view.ejs', {postlist : context_2,
+                                           gotime : timestamps.renderFunc,
+                                           userdata : userdata,
+                                           thread_data : req.params.thread_id,
+                                           viewAuth : "user" })
+        }
+
+
+    })
+
 
 })
 
@@ -115,7 +145,7 @@ router.post('/thread:thread_id/postWriteOk', function(req,res){
 
     postNum = context.totalPost;
     let today =+ new Date();
-    var saveinfo  = {post_id : postNum+1, usr_id : req.user.usr_id, post_name : req.body.titleData, post_context : req.body.contextData,
+    var saveinfo  = {usr_Nname : req.user.usr_Nname, post_id : postNum+1, usr_id : req.user.usr_id, post_name : req.body.titleData, post_context : req.body.contextData,
                      thread_id : parseInt(req.params.thread_id), post_Viewer : 0, comment : 0, date : today }
 
     database.collection('thread_post').insertOne(saveinfo, function(err, context_2){
@@ -190,23 +220,29 @@ router.post('/delete/:postId', function(req,res){
 
     
     var deleteinfo = { post_id : parseInt(req.body.postId) };
-
     database.collection('thread_post').deleteOne(deleteinfo, function(err, context){
 
-        database.collection('thread_counter').findOne({count: '카운트'}, function(err, context){
-
-            database.collection('thread_counter').updateOne({count : '카운트'}, { $inc : {totalPost :-1}}, function(err, context_3){
+ 
         var result = "삭제 완료되었습니다.";
         res.send ({result : result});
 
-            })
-    })
-})
-
-
 
 })
+})
 
+router.delete('/deletead/:postId', function(req,res){
+
+    
+    var deleteinfo = { post_id : parseInt(req.body.postId) };
+    database.collection('thread_post').deleteOne(deleteinfo, function(err, context){
+
+ 
+        var result = "삭제 완료되었습니다.";
+        res.send ({result : result});
+
+
+})
+})
 
 
 
