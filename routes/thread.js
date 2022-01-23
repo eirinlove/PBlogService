@@ -78,6 +78,40 @@ router.post('/threadJoinFunc', function(req,res){
 else {var result = "no"; res.send ({result:result})}  
 })
 
+router.post('/brexit', function(req,res){
+
+    // var dothat = parseInt(req.body.postId);
+    var dothat =  parseInt(req.body.postId);
+   
+  //배열 번호 가진상태
+    database.collection('user').updateOne({usr_id : req.user.usr_id}, {$pull : {"join_thread":dothat}}, function(err, context){
+        database.collection('thread_list').updateOne({thread_id:dothat}, { $inc : {thread_usrNum :-1}}, function(err, context_3){ 
+
+
+
+            var result = "ok";
+            res.send({result : result});
+             // console.log('삭제'+dothat);
+        })
+       
+
+    })
+
+})
+
+router.post('/beJoin', function(req,res){
+
+
+    var dothat = parseInt(req.body.postId);
+
+    database.collection('user').updateOne({usr_id : req.user.usr_id}, {$push : {"join_thread":dothat}}, function(err, context){
+        database.collection('thread_list').updateOne({thread_id:dothat}, { $inc : {thread_usrNum :1}}, function(err, context_3){ 
+        console.log('추가'+dothat);
+        var result = "ok";
+        res.send ({result : result});
+        })
+    } )
+})
 
 
 router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는 게시글 목록. :thread_id 로 thread_id 인자 받아왔음 
