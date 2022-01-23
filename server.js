@@ -7,7 +7,7 @@ app.use(methodOverride('_method'))
 var database;
 
 var cryp = require('./function/crypto');
-
+var titleviewer = require('./public/js/titleViewer');
 
 
 const { ObjectId } = require('mongodb');
@@ -501,11 +501,30 @@ app.get('/loadUserData', function(req,res){
 app.get('/joinThread', function(req,res){
 
 
-        res.render('joinThread.ejs',{});
+        res.render('joinThread.ejs',{titleViewer : titleviewer.renderFunc});
 })
 
 app.post('/joinThreadView', function(req,res){
 
+database.collection('user').findOne({usr_id : req.user.usr_id}, function(err, context){
+
+
+var threadList = context.join_thread;
+var threadName = [];
+for(var i = 0; i<threadList.length; i++){
+
+console.log (threadList[i]);
+threadName[i] = titleviewer.renderFunc(threadList[i]);
+
+}
+
+
+ // console.log (threadlist[0]); 조인 스레드 배열로 참고
+ 
+res.send({threadList : threadList,
+          threadName : threadName})
+})
+        
 
 })
 
