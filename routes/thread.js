@@ -61,8 +61,22 @@ router.get('/thread_list', function(req,res){// 스레드 목록
 
             res.render('thread_list.ejs', {threads_info : context});
     })
-    
 
+router.post('/threadJoinFunc', function(req,res){
+
+    if (req.user){
+    database.collection('user').findOne({usr_id : req.user.usr_id}, function(err, context){
+
+        console.log ('키개수'+titleviewer.keyViewer());
+        var threadList = context.join_thread;
+        var result = "ok";      
+        res.send({result:result,
+                  threadNum : threadList,
+                  threadPage : titleviewer.keyViewer()})
+})
+}
+else {var result = "no"; res.send ({result:result})}  
+})
 
 
 

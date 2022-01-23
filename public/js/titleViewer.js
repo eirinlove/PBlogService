@@ -34,5 +34,10 @@ exports.renderFunc =
        }
 
        
+  exports.keyViewer =
   
+  function keyBinder(){
+
+    return data.length;
+  }
      

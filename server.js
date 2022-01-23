@@ -10,7 +10,7 @@ var cryp = require('./function/crypto');
 var titleviewer = require('./public/js/titleViewer');
 
 
-const { ObjectId } = require('mongodb');
+const { ObjectId, OrderedBulkOperation } = require('mongodb');
 const http = require('http').createServer(app);
 const { Server } = require("socket.io"); //웹 소켓 이용
 const io = new Server(http);
@@ -506,6 +506,9 @@ app.get('/joinThread', function(req,res){
 
 app.post('/joinThreadView', function(req,res){
 
+
+if (req.user){
+
 database.collection('user').findOne({usr_id : req.user.usr_id}, function(err, context){
 
 
@@ -520,11 +523,18 @@ threadName[i] = titleviewer.renderFunc(threadList[i]);
 
 
  // console.log (threadlist[0]); 조인 스레드 배열로 참고
- 
-res.send({threadList : threadList,
+var result = "ok";
+res.send({result : result,
+          threadList : threadList,
           threadName : threadName})
 })
-        
+}
+
+
+else { 
+        var result = "no";
+        res.send({result : result})
+}
 
 })
 
