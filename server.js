@@ -497,6 +497,18 @@ app.get('/loadUserData', function(req,res){
         }
 })
 
+
+app.get('/joinThread', function(req,res){
+
+
+        res.render('joinThread.ejs',{});
+})
+
+app.post('/joinThreadView', function(req,res){
+
+
+})
+
 app.use('/blog', require('./routes/blog.js')); //app.use는 미들웨어(패키지) 사용  -> 요청 응답사이에 실행됨
 app.use('/board/sub', require('./routes/board.js')); 
 app.use('/thread', require('./routes/thread.js'));
