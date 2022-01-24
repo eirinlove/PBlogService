@@ -191,9 +191,11 @@ app.use(passport.initialize());
 app.use(passport.session()); // 요청과 응답 사이 동작 세션 사용
 
 
-app.get('/logins', function(req,res){
+app.post('/logins', function(req,res){
 
-        res.render('login.ejs');
+        console.log(req.body.redirectLink);
+        // console.log ('현재페이지 '+direct);
+        res.render('login.ejs', {redirectLink : req.body.redirectLink});
 
 });
 
@@ -203,7 +205,7 @@ app.post('/login', passport.authenticate('local',{
 
 }), function(req,res){ //passport-> 로그인 기능 단축 구현, 인증 메서드 사용
 
-res.redirect('/'); //응답(인증) 성공의 경우. 메인페이지로
+res.redirect(req.body.redirectLink); //응답(인증) 성공의 경우. 로그인 시작한 페이지로.
 });
 
 

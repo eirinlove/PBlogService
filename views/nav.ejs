@@ -27,7 +27,7 @@
 
           <a class="nav-link" href="joinThread">참가 스레드</a>
           
-          <a class="nav-link active loginCheck">로그아웃</a>
+          <a class="nav-link active loginCheck">로그아웃</a></form>
                     
           <link rel = "stylesheet" type="text/css" href= "../public/main.css">
             
@@ -52,12 +52,19 @@
               
             }
             else {
-              $('.loginCheck').html("<a class = 'Check_link' href='../../../logins'>로그인</a>");
+              var redirectLink = window.location.href;
+              $('.loginCheck').html("<form id ='chksubmit' action = '/logins' method ='POST'><a class = 'Check_link' onclick = 'return chk_form()'>로그인</a><input type='hidden' name ='redirectLink' value ='"+redirectLink+"'></form>")
               
             }
           })
 
 
 })
+
+function chk_form(){
+
+  document.getElementById('chksubmit').submit();
+}
+
     </script>
   </nav>
