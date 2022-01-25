@@ -81,3 +81,14 @@
     height :  50px;
     background-color: darkorange;
 }
+
+.comment_box{
+
+    border : 1px solid black;
+}
+
+.info-line{
+
+    border : 0.5px solid gray;
+    background-color: rgb(226, 226, 226);
+}
