@@ -112,10 +112,33 @@ $('.content_context_box').html(contextData);
 
 })
 
-.$.ajax({
+$.ajax({
     method : 'POST',
     url : '/comment/getComment/',
     data : { postId : '<%=postData.post_id%>'}
+}).done(function(rep){
+
+for (var depthNum=0; depthNum<= 10; depthNum++){
+
+for (var parent=0; parent<rep.PList.length; parent++){
+
+for (var child=0; child<rep.CList.length; child++){
+
+if (rep.CList[child].depth == depthNum && rep.CList[child].connection_id == rep.PList[parent].comment_id){
+
+console.log (rep.CList[child].comment_context + '는' + rep.PList[parent].comment_context + '의 답글입니다.');
+
+
+
+}
+
+}
+
+}
+
+}
+
+
 })
 
 $('.postDelete').click(function(e){
