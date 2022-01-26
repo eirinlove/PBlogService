@@ -41,7 +41,7 @@
     </div>
     <div class = "content_commentArea">
 <% for (var i = 0; i < comment.length; i++){ if (comment[i].connection_id == 0 ){%>
-      <div class = "comment_box">
+      <div class = "comment_box comment_<%=comment[i].comment_id%>">
           <div class = "info-line"> <%=comment[i].usr_id%>
           <div class = "float_right"> 날짜 <%=comment[i].date%> </div></div>
           <div class = "comment_context"><%=comment[i].comment_context%></div>
@@ -126,9 +126,10 @@ for (var child=0; child<rep.CList.length; child++){
 
 if (rep.CList[child].depth == depthNum && rep.CList[child].connection_id == rep.PList[parent].comment_id){
 
-console.log (rep.CList[child].comment_context + '는' + rep.PList[parent].comment_context + '의 답글입니다.');
+//console.log (rep.CList[child].comment_context + '는' + rep.PList[parent].comment_context + '의 답글입니다.');
 
-
+//$('.comment_'+rep.PList[parent].comment_id).append(rep.CList[child].comment_context);// 이렇게 하면, 해당 comment 요소의 끝에 들어감. 하지만, 아래 새로운 div를 갱신해야함
+$('.comment_'+rep.PList[parent].comment_id).append("<div class = 'rep_comment' style='padding-left:"+depthNum*30+"px;'><div class = 'info-line'>"+rep.CList[child].usr_id+"<div class = 'float_right'> 날짜 "+rep.CList[child].date+"</div></div><div class='comment_context'>"+rep.CList[child].comment_context+"</div></div>");
 
 }
 
