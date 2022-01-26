@@ -303,11 +303,24 @@ router.get('/thread:thread_id/:post_id', function(req, res){ // : 로, 사용자
             database.collection('thread_post').updateOne({post_id : parseInt(req.params.post_id)}, {$inc: {post_Viewer:1}},function(err, Viewer_conetext){
 
                 console.log("포스트 데이터"+context);
+                database.collection('comment').find({post_id : parseInt(context.post_id)}).toArray( function(err, comment){
+                    console.log (comment[0]);
+                if ( req.user ){
+                    res.render('postDetail.ejs',   {postData : context,
+                        postlist : context_another,
+                        gotime : timestamps.renderFunc,
+                        thread_list : titleviewer.renderFunc,
+                        userData : req.user.usr_id,
+                        comment : comment})
 
+                }else {
                 res.render('postDetail.ejs',   {postData : context,
                                                 postlist : context_another,
                                                 gotime : timestamps.renderFunc,
-                                                thread_list : titleviewer.renderFunc});
+                                                thread_list : titleviewer.renderFunc,
+                                                userData : null,
+                                                comment : comment}) };
+                                            })
             })
 
 

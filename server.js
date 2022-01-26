@@ -545,5 +545,6 @@ app.use('/board/sub', require('./routes/board.js'));
 app.use('/thread', require('./routes/thread.js'));
 //app.use('/mail', require('./auth.js')); 메일 직접보내는 라우터, /old 폴더에 존재.
 app.use('/accountfunc', require('./routes/account.js'));
+app.use('/comment', require('./routes/comment.js'));
 // blog 로 접속하면, blog.js 로 라우팅을 하게 만듬
 // 검색 결과 페이지 만들기.

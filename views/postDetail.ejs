@@ -40,18 +40,19 @@
       <div class = "content_mainFunction"> <button class = "function_position postModify">수정</button> <button class = "function_position postDelete">삭제</button></div>
     </div>
     <div class = "content_commentArea">
-
+<% for (var i = 0; i < comment.length; i++){ if (comment[i].connection_id == 0 ){%>
       <div class = "comment_box">
-          <div class = "info-line"> 사용자 정보
-          <div class = "float_right"> 날짜 </div></div>
-          <div class = "comment_context">내용내용</div>
+          <div class = "info-line"> <%=comment[i].usr_id%>
+          <div class = "float_right"> 날짜 <%=comment[i].date%> </div></div>
+          <div class = "comment_context"><%=comment[i].comment_context%></div>
       </div>
+      <%}}%>
      
     </div>
 
 
 
-
+    
     <div class = "content_commentWriteArea"> 댓글을 작성하십시오
       <div class = "commentWriteInfo">사용자 정보</div>
       <div class = "inputComment"><textarea></textarea><div class ="float_right"><button>작성</button></div></div>
@@ -111,6 +112,11 @@ $('.content_context_box').html(contextData);
 
 })
 
+.$.ajax({
+    method : 'POST',
+    url : '/comment/getComment/',
+    data : { postId : '<%=postData.post_id%>'}
+})
 
 $('.postDelete').click(function(e){
 
