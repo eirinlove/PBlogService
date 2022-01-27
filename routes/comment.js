@@ -52,4 +52,36 @@ database.collection('thread_counter').findOne({count:'카운트'}, function(err,
     })
 })
 
+
+router.post('/repSend', function(req,res){
+
+database.collection('thread_counter').findOne({count:'카운트'}, function(err,context){
+database.collection('comment').findOne({comment_id:parseInt(req.body.depthHelp)}, function(err,context_2){
+
+
+
+    let today =+ new Date();
+    var saveinfo = {comment_id : context.totalComment+1, post_id:parseInt(req.body.postId), comment_context : req.body.textData, connection_id : parseInt(req.body.parentId), date : today, depth : parseInt(context_2.depth+1), isDeleted : false, usr_id: req.user.usr_id, usr_Nname : req.user.usr_Nname }
+    
+    database.collection('comment').insertOne(saveinfo, function(err,context_2){ 
+
+    database.collection('thread_counter').updateOne({count : "카운트"}, {$inc : { totalComment: 1}}, function(err, context_4){
+
+        var result = "성공";
+        res.send({result:result});
+
+
+     })
+
+
+    })
+
+})
+
+
+
+})
+
+})
+
 module.exports = router;
