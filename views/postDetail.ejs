@@ -41,9 +41,9 @@
     </div>
     <div class = "content_commentArea">
 <% for (var i = 0; i < comment.length; i++){ if (comment[i].connection_id == 0 ){%>
-      <div class = "comment_box comment_<%=comment[i].comment_id%>">
+      <div class = "comment_box comment_<%=comment[i].comment_id%>" number = <%=comment[i].comment_id%>>
           <div class = "info-line"> <%=comment[i].usr_Nname%>
-          <div class = "float_right"> 날짜 <%=comment[i].date%> </div></div>
+          <div class = "float_right"> 날짜 <%=comment[i].date%> | <a class = 'repPage' number='<%=comment[i].comment_id%>' href='#' status='0'>답글</a></div></div>
           <div class = "comment_context"><%=comment[i].comment_context%></div>
       </div>
       <%}}%>
@@ -129,7 +129,7 @@ if (rep.CList[child].depth == depthNum && rep.CList[child].connection_id == rep.
 //console.log (rep.CList[child].comment_context + '는' + rep.PList[parent].comment_context + '의 답글입니다.');
 
 //$('.comment_'+rep.PList[parent].comment_id).append(rep.CList[child].comment_context);// 이렇게 하면, 해당 comment 요소의 끝에 들어감. 하지만, 아래 새로운 div를 갱신해야함
-$('.comment_'+rep.PList[parent].comment_id).append("<div class = 'rep_comment' style='padding-left:"+depthNum*30+"px;'><div class = 'info-line'>"+rep.CList[child].usr_Nname+"<div class = 'float_right'> 날짜 "+rep.CList[child].date+"</div></div><div class='comment_context'>"+rep.CList[child].comment_context+"</div></div>");
+$('.comment_'+rep.PList[parent].comment_id).append("<div class = 'comment_box comment_"+rep.CList[child].comment_id+"' number = "+rep.CList[child].comment_id+" style='padding-left:"+depthNum*30+"px;'><div class = 'info-line'>"+rep.CList[child].usr_Nname+"<div class = 'float_right'> 날짜 "+rep.CList[child].date+"|<a class = 'repPage' href='#' status='0' number = "+rep.CList[child].comment_id+" >답글</a></div></div><div class='comment_context'>"+rep.CList[child].comment_context+"</div></div>");
 
 }
 
@@ -180,6 +180,19 @@ location.replace("/thread/deleteCheck/<%=postData.post_id%>")
 
 
 })
+
+$(document).on("click", ".repPage", (function(e){
+
+  if ($(e.target).attr('status') == "0" ){
+
+    alert("열렸습니다.");
+    
+    $(e.target).attr('status', 1) // attr 변경
+    $(e.target).parents('.comment_'+$(e.target).attr('number')).append("<div class = 'repbox' style='padding-left: 30px;'><textarea></textarea><div class = 'float_right'><button>작성</button></div></div>");
+    
+  }
+  else { alert("닫혔습니다.")}
+}));
   </script>
 
         </script>
