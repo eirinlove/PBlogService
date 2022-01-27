@@ -185,13 +185,17 @@ $(document).on("click", ".repPage", (function(e){
 
   if ($(e.target).attr('status') == "0" ){
 
-    alert("열렸습니다.");
+    //alert("열렸습니다.");
     
     $(e.target).attr('status', 1) // attr 변경
     $(e.target).parents('.comment_'+$(e.target).attr('number')).append("<div class = 'repbox' style='padding-left: 30px;'><textarea></textarea><div class = 'float_right'><button>작성</button></div></div>");
     
   }
-  else { alert("닫혔습니다.")}
+  else { //alert("닫혔습니다.")
+        $(e.target).attr('status',0)
+        $(e.target).parents('.comment_'+$(e.target).attr('number')).children('.repbox').remove('.repbox');
+      
+      }
 }));
   </script>
 
