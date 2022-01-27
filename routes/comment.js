@@ -31,4 +31,25 @@ router.post('/getComment', function(req,res){
 });
 
 
+router.post('/commentSend', function(req,res){
+
+
+database.collection('thread_counter').findOne({count:'카운트'}, function(err,context){
+    let today =+ new Date();
+    var saveinfo = {comment_id : context.totalComment+1, post_id:parseInt(req.body.postId), comment_context : req.body.textData, connection_id : 0, date : today, depth : 0, isDeleted : false, usr_id :req.user.usr_id, usr_Nname : req.user.usr_Nname }
+    database.collection('comment').insertOne(saveinfo,function(err,context_2){
+        database.collection('thread_counter').updateOne({count : "카운트"}, {$inc : { totalComment:1}}, function(err, context_3 ){
+
+            var result = "성공";
+            res.send ({result:result});
+
+
+
+        })
+
+
+    })
+    })
+})
+
 module.exports = router;

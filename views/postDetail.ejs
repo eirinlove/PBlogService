@@ -42,7 +42,7 @@
     <div class = "content_commentArea">
 <% for (var i = 0; i < comment.length; i++){ if (comment[i].connection_id == 0 ){%>
       <div class = "comment_box comment_<%=comment[i].comment_id%>">
-          <div class = "info-line"> <%=comment[i].usr_id%>
+          <div class = "info-line"> <%=comment[i].usr_Nname%>
           <div class = "float_right"> 날짜 <%=comment[i].date%> </div></div>
           <div class = "comment_context"><%=comment[i].comment_context%></div>
       </div>
@@ -52,14 +52,14 @@
 
 
 
-    
+    <% if (userData){ %>
     <div class = "content_commentWriteArea"> 댓글을 작성하십시오
       <div class = "commentWriteInfo">사용자 정보</div>
-      <div class = "inputComment"><textarea></textarea><div class ="float_right"><button>작성</button></div></div>
+      <div class = "inputComment"><textarea class = 'textContext'></textarea><div class ="float_right"><button class = "commentSend">작성</button></div></div>
 
     </div>
     
-
+    <%}%>
     
 
 
@@ -129,7 +129,7 @@ if (rep.CList[child].depth == depthNum && rep.CList[child].connection_id == rep.
 //console.log (rep.CList[child].comment_context + '는' + rep.PList[parent].comment_context + '의 답글입니다.');
 
 //$('.comment_'+rep.PList[parent].comment_id).append(rep.CList[child].comment_context);// 이렇게 하면, 해당 comment 요소의 끝에 들어감. 하지만, 아래 새로운 div를 갱신해야함
-$('.comment_'+rep.PList[parent].comment_id).append("<div class = 'rep_comment' style='padding-left:"+depthNum*30+"px;'><div class = 'info-line'>"+rep.CList[child].usr_id+"<div class = 'float_right'> 날짜 "+rep.CList[child].date+"</div></div><div class='comment_context'>"+rep.CList[child].comment_context+"</div></div>");
+$('.comment_'+rep.PList[parent].comment_id).append("<div class = 'rep_comment' style='padding-left:"+depthNum*30+"px;'><div class = 'info-line'>"+rep.CList[child].usr_Nname+"<div class = 'float_right'> 날짜 "+rep.CList[child].date+"</div></div><div class='comment_context'>"+rep.CList[child].comment_context+"</div></div>");
 
 }
 
@@ -141,6 +141,27 @@ $('.comment_'+rep.PList[parent].comment_id).append("<div class = 'rep_comment' s
 
 
 })
+
+$('.commentSend').click(function(e){
+
+var insertText = $('.textContext').val(); 
+
+
+if (insertText){
+
+  $.ajax({ method : 'POST',
+           url : '/comment/commentSend',
+           data : {postId : '<%=postData.post_id%>',
+                   textData : insertText}})
+                   .done(function(rep){
+
+                    alert( '작성완료');
+                    location.reload();
+                   })
+          }
+
+else { alert ( '텍스트를 입력하세요 ')}
+}) 
 
 $('.postDelete').click(function(e){
 
