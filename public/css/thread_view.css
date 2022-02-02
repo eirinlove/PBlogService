@@ -17,6 +17,7 @@ background-color :red;
 }
 
 .debate_area{
+    padding : 30px;
 width: 850px;
 height: 250px;
 background-color: blue;
@@ -104,3 +105,21 @@ text-align: center;
     
 }
 
+
+
+.debate_box{
+    display: inline-block;
+    text-align : center;
+    width: 250px;
+    height : 150px;
+}
+
+.debate_title{
+
+    display:block;
+}
+
+.debate_date{
+    margin-top : 100px;
+    float : right;
+}

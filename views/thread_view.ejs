@@ -27,7 +27,16 @@
     <div class= thread_title>
 
     </div>
-    <div class= debate_area></div>
+    <div class= debate_area>
+    <%for (i=0; i<debate.length; i++){ 
+      if ( i<3 ){ %>
+      <div class = debate_box>
+        <span class = "debate_title"><%=debate[i].debate_name%></span>
+        <span class = "debate_context"><%=debate[i].debate_context%></span>
+        <span class = "debate_date"><%=debate[i].date%></span> 
+      </div>
+      <%}}%> 
+    </div>
 
     
     <div class= thread_view_area>

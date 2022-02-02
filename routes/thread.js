@@ -130,7 +130,7 @@ router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는
     
     database.collection('thread_post').find({thread_id : parseInt(req.params.thread_id)}).toArray(function(err, context_2){ // 받은 문자를 받게됨,  위에 get 한 것.  parseint로 String을 Int로 변환
 
-        database.collection('debate').find({thread_id : parseInt(req.params.thread_id)}.toArray(function(err,context_3){ 
+        database.collection('debate').find({thread_id : parseInt(req.params.thread_id)}).toArray(function(err,context_3){ 
         //console.log(req.params.id);
         console.log(context_2);
 
@@ -170,7 +170,7 @@ router.get('/thread:thread_id', function(req,res){ // 해당 스레드에 있는
                                            debate : context_3})
         }
    
-    }))
+    })
 
     })
 
