@@ -1,5 +1,5 @@
 # DebateThreadService
-Nodejs 토론 스레드 서비스 개발
+Nodejs 글타래형 게시판 + BBS 게시판 융합 커뮤니티 구현
 
 
 프로젝트 기간 : 2021년 12월 19일 ~ 2021년 1월 3일
