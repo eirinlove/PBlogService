@@ -55,3 +55,17 @@ Nodejs 글타래형 게시판 + BBS 게시판 융합 커뮤니티 구현
 
   ------------------
    ## 시연 영상
+[![Video Label](http://img.youtube.com/vi/m1JWqYCI9I8/0.jpg)](https://www.youtube.com/watch?v=m1JWqYCI9I8)
+
+  ## 산출물 
+  
+
+ 
+
+
+
+  https://drive.google.com/file/d/1bEjgYjYjDkte9_1BHkaKt01E5J2qkwvN/view?usp=sharing
+  
+  ## 리뷰
+  
+  https://drive.google.com/file/d/1kVE62KD35WH8AhwuKrHUbwVzHnNBGNbh/view?usp=sharing
