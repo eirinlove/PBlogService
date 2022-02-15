@@ -2,7 +2,7 @@
 Nodejs 글타래형 게시판 + BBS 게시판 융합 커뮤니티 구현
 
 
-프로젝트 기간 : 2021년 12월 19일 ~ 2021년 1월 3일
+프로젝트 기간 : 2021년 12월 19일 ~ 2022년 1월 3일
 
 1차 연장기간 : 1월 4일 ~ 1월 14일
 2차 연장기간 : ~ 1월 17일 ( ~ 스레드 CRUD 관련 기능 )
@@ -58,14 +58,10 @@ Nodejs 글타래형 게시판 + BBS 게시판 융합 커뮤니티 구현
 [![Video Label](http://img.youtube.com/vi/m1JWqYCI9I8/0.jpg)](https://www.youtube.com/watch?v=m1JWqYCI9I8)
 
   ## 산출물 
-  
-
  
-
-
 
   https://drive.google.com/file/d/1bEjgYjYjDkte9_1BHkaKt01E5J2qkwvN/view?usp=sharing
   
   ## 리뷰
   
-  https://drive.google.com/file/d/1kVE62KD35WH8AhwuKrHUbwVzHnNBGNbh/view?usp=sharing
+  https://drive.google.com/file/d/1htMdNMO5q4jxrKkZap0Cmz1gKRg-r8hd/view?usp=sharing
