@@ -3,13 +3,15 @@
     width: 850px;
     min-height : 500px;
     height: auto;
-    background-color: red;
+    
+    border : 1px solid gray;
 }
 
 .content_title_box{
 
   height : 50px;
-  background-color: gray;
+  
+  border : 1px solid gray;
   padding-left: 15px;
   padding-top : 10px;
   font-size : 18px;
@@ -20,7 +22,7 @@
     padding-left: 15px;
     padding-top : 5px;
     height : 30px;
-    background-color: blue;
+    border : 1px solid gray;
 }
 
 .content_user_info {
@@ -49,7 +51,7 @@
 .content_voteRecommend{
     text-align : center;
     height : 50px;
-    background-color:cornsilk;
+    border : 1px solid gray;
 }
 
 
@@ -65,7 +67,7 @@
     text-align : right; /* 엘리먼트 우측 정렬 */
     
     height : 50px;
-    background-color : gray;
+    border : 2px solid gray;
     
 }
 

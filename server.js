@@ -49,7 +49,7 @@ require('dotenv').config();
 
 
 
-app.use('/public', express.static('public'));  // 미들웨어 static파일 보관하기위해 public 폴더 쓸겁니다., 정적 import 파일들 관리 가능, css같은것
+app.use('/public', express.static('public'));  // 미들웨어 static파일 보관하기위해 public 폴더 사용
 app.use('/function', express.static('function')); 
 
 const MongoClient = require('mongodb').MongoClient;
@@ -102,14 +102,12 @@ app.get('/write', function(req,res){
 
 
 
-// /list로 GET요청으로 접속하면
-// 실제 DB에 저장된 데이터들로 꾸며진 HTML을 보여줌
+
 
 
 
 app.get('/list', function(req,res){
 
-// DB에 저장된post라는 collection 안의 모든 데이터를 꺼내줘. // list.ejs에서 post단어를 posts로 치환해줘
 database.collection('post').find().toArray(function(err, context){
         res.render('list.ejs', {posts : context});
         console.log(context);
@@ -138,9 +136,9 @@ app.get('/detail/:id', function(req, res){ // : 로, 사용자가 입력한 문�
 
                 console.log(context);
 
-                res.render('detail.ejs', {data : context}); // data object를 정의해서 detail.ejs 에서 읽어올 수 있게 함.
+                res.render('detail.ejs', {data : context}); // data object를 정의
 
-                //응답.render('detail.ejs', {이런 이름으로 : 이런 데이터를}) ejs파일은 render를 해줘야 하니 필수
+
 
         })
 

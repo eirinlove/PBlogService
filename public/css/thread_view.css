@@ -1,9 +1,16 @@
+body{
+
+
+    background-color: rgb(246, 246, 246);
+}
+
 .article_area{
 
 margin-left : 35px;
 margin-top : 35px;
 width: 850px;
 height : 1300px;
+
 }
 
 
@@ -12,7 +19,8 @@ width: 850px;
 height : 50px;
 padding-left : 15px;
 margin-bottom : 25px;
-background-color :red;
+
+border : 0.5px solid gray;
 
 }
 
@@ -20,7 +28,9 @@ background-color :red;
     padding : 30px;
 width: 850px;
 height: 250px;
-background-color: blue;
+border : solid 1px rgb(189, 186, 186);
+/*background-color: blue;*/
+background-color : white;
 
 }
 
@@ -29,7 +39,9 @@ background-color: blue;
 
     width: 850px;
     height: 1000px;
-    background-color: blueviolet;
+    /*background-color: blueviolet;*/
+    border :solid 2px rgb(189, 186, 186);
+    background-color : white;
 }
 
 .postNumber{
@@ -112,6 +124,8 @@ text-align: center;
     text-align : center;
     width: 250px;
     height : 150px;
+    border :solid 1px rgb(189, 186, 186);
+    border-radius : 3%;
 }
 
 .debate_title{
